@@ -1,0 +1,24 @@
+<p class="title">Scheduled Releases</p>
+<div *ngIf="isCurrentMonth()" class="custom-nav-link-calendar flex-grow-1">
+  <div class="d-flex justify-content-center">
+    <p (click)="changeSection('Past')"
+       [ngClass]="(section$ | async) == isPast() ? 'active-month' : ''"
+       class="px-3 py-3 gray-border custom-tab-title">
+      Past
+    </p>
+    <p (click)="changeSection('Upcoming')"
+       [ngClass]="(section$ | async) == isUpcoming() ? 'active-month' : ''"
+       class="px-3 py-3 gray-border custom-tab-title">
+      Upcoming
+    </p>
+  </div>
+</div>
+<div *ngIf="releases" class="d-flex justify-content-start flex-wrap">
+  <app-product-card *ngFor="let release of releases"
+                    [release]="release"
+                    [showDate]="true">
+  </app-product-card>
+  <ng-container *ngIf="(loading$ | async)">
+    <app-skeleton-product-box *ngFor="let item of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]"></app-skeleton-product-box>
+  </ng-container>
+</div>

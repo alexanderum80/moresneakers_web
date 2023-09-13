@@ -1,0 +1,26 @@
+<div (scrolled)="scrolled()" class="d-flex flex-column" infiniteScroll>
+    <app-navbar></app-navbar>
+    <app-ms-breadcrumb
+            *ngIf="collection$ | async as Collection"
+            [breadcrumb]="[{ name: (collection$ | async).name }]"></app-ms-breadcrumb>
+    <app-style-page-header
+            *ngIf="collection$ | async as Collection"
+            [description]="(collection$ | async).description"
+            [imgUrl]="(collection$ | async).imgUrl"
+            [title]="(collection$ | async).name">
+    </app-style-page-header>
+    <div class="my-5" id="filterContainer">
+        <app-style-group
+                (changeSortOption)="changeSort($event)"
+                (changeFilters)="changeFilters($event)"
+                [slug]="collectionSlug"
+                [count]="selectReleasesByStyleCount$ | async"
+                [currentPage]="currentPage$ | async"
+                [loading]="loading$ | async"
+                [releases]="releasesByCollection$ | async"
+                [totalPages]="totalPages$ | async"
+                [urlFilters]="urlFilters$ | async">
+        </app-style-group>
+    </div>
+    <app-footer></app-footer>
+</div>

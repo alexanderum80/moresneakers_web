@@ -1,0 +1,65 @@
+<div class="deal-card">
+    <div class="position-relative d-flex flex-column">
+        <a [href]="deal.links.length ? getLink(deal.links[0]): '#'"
+           rel="nofollow"
+           target="_blank">
+            <div class="image-wrapper border-bottom d-flex justify-content-center align-items-center">
+                <img *ngIf="deal.imgUrl" [alt]="getImgAlt()" [src]="deal.imgUrl" [title]="deal.shop.name"/>
+            </div>
+        </a>
+        <div class="deal-body d-flex flex-column align-items-center justify-content-around p-3">
+            <h6 class="title">
+                {{ deal.shop.name }}
+            </h6>
+            <div>{{deal.description}}</div>
+            <div *ngIf="deal.promoCode" class="my-1 d-flex justify-content-center align-items-center">
+                <div class="mx-1">{{deal.promoCode}}</div>
+                <i class="fa fa-files-o fa-1x cursor-pointer" aria-hidden="true" data-toggle="tooltip"
+                   data-placement="top"
+                   title="Copy Promo code to clipboard"
+                   (click)="copyToClipBoard()">
+                </i>
+            </div>
+            <div *ngIf="deal.salePercentage">
+                Sale {{deal.salePercentage}}%
+            </div>
+            <div class="my-2 text-center" *ngIf="deal.endDate">
+                <ng-container>
+                    <div [style.color]="getStatusStyle()" class="status">
+                        {{ deal.status === 'Expired' || isDateEnded(getEndDateToUtc()) ? 'Ended on' : 'Ends on' }}
+                    </div>
+                    <div class="status-name text-center">{{ getDateString(getEndDateToUtc()) }}</div>
+                    <app-count-down
+                            [prefix]="''"
+                            [value]="getEndDateToUtc()">
+                    </app-count-down>
+                </ng-container>
+            </div>
+            <div *ngIf="deal.links?.length > 1; else onlyOneLink" class="mx-2 my-1 width-40 p-0">
+                <div class="d-inline-block" ngbDropdown>
+                    <button class="link-button" id="links-dropdown" ngbDropdownToggle>
+                        Get it <i class="fa fa-angle-down fa-lg ml-2"></i>
+                    </button>
+                    <div aria-labelledby="links-dropdown" ngbDropdownMenu>
+                        <a *ngFor="let link of deal.links"
+                           [href]="getLink(link)"
+                           ngbDropdownItem
+                           rel="nofollow"
+                           target="_blank">
+                            {{ getLinkText(link.text) }}
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <ng-template #onlyOneLink>
+                <button *ngIf="deal.links?.length" class="link-button mx-2 my-1 width-40 p-0">
+                    <a [href]="getLink(deal.links[0])"
+                       class="link"
+                       rel="nofollow"
+                       target="_blank"
+                    >{{ getLinkText(deal.links[0].text) }}</a>
+                </button>
+            </ng-template>
+        </div>
+    </div>
+</div>

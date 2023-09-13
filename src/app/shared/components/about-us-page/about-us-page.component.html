@@ -1,0 +1,12 @@
+<div class="d-flex flex-column">
+  <app-navbar></app-navbar>
+  <app-ms-breadcrumb
+    [breadcrumb]="[{ name: breadcrumbName }]"></app-ms-breadcrumb>
+  <app-heading *ngIf="h1Title" [title]="h1Title" style="margin-top: 4rem">
+  </app-heading>
+  <div
+    *ngIf="data"
+    [innerHTML]="data"
+    class="w-100 my-5 container custom-data"></div>
+  <app-footer></app-footer>
+</div>

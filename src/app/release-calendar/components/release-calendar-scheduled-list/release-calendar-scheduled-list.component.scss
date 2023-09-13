@@ -1,0 +1,37 @@
+.title {
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 24px;
+  line-height: 29px;
+  text-transform: uppercase;
+  color: #daab28;
+}
+
+i {
+  width: 232px;
+  height: 0;
+  margin: 0;
+}
+
+.gray-border {
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.active-month {
+  border-bottom: solid 2px #daab28;
+  opacity: 1 !important;
+}
+
+.custom-tab-title {
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 20px;
+  /* identical to box height */
+  text-transform: uppercase;
+  color: #000000;
+  opacity: 0.5;
+  cursor: pointer;
+}

@@ -1,0 +1,26 @@
+.information {
+  background: #000000;
+  padding: 15px;
+  display: flex;
+}
+
+@media (max-width: 766px) {
+  .information {
+    display: none;
+  }
+}
+
+.information-text {
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 20px;
+  color: #ffffff;
+}
+
+#info-icon {
+  color: #daab28;
+  line-height: 20px;
+  font-size: 16px;
+}

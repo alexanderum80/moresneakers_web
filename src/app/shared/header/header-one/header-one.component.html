@@ -1,0 +1,69 @@
+<header [class.fixed]="stick && sticky" [ngClass]="class" class="sticky">
+    <div class="mobile-fix-option"></div>
+    <div *ngIf="topbar" class="top-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="header-contact">
+                        <ul>
+                            <li>Welcome to Our store Multikart</li>
+                            <li>
+                                <i aria-hidden="true" class="fa fa-phone"></i>Call Us: 123 - 456
+                                - 7890
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-6 text-right">
+                    <ul class="header-dropdown">
+                        <li class="compare">
+                            <a [routerLink]="['/shop/compare']"
+                            ><i aria-hidden="true" class="fa fa-random"></i>Compare</a
+                            >
+                        </li>
+                        <li class="mobile-wishlist">
+                            <a [routerLink]="['/shop/wishlist']"
+                            ><i aria-hidden="true" class="fa fa-heart"></i>Wishlist</a
+                            >
+                        </li>
+                        <li class="onhover-dropdown mobile-account">
+                            <i aria-hidden="true" class="fa fa-user"></i> My Account
+                            <ul class="onhover-show-div">
+                                <li>
+                                    <a data-lng="en"> Login </a>
+                                </li>
+                                <li>
+                                    <a data-lng="es"> Logout </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="main-menu">
+                    <div class="menu-left">
+                        <app-left-menu></app-left-menu>
+                        <div class="brand-logo">
+                            <a id="headerlogo" routerLink="/home/fashion">
+                                <img [src]="urlToHttps(themeLogo)" alt="logo" class="img-fluid"/>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="menu-right pull-right">
+                        <div>
+                            <app-menu></app-menu>
+                        </div>
+                        <div>
+                            <app-settings></app-settings>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>

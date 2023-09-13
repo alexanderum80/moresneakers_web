@@ -1,0 +1,30 @@
+<div class="container h-100">
+    <div class="d-flex flex-lg-nowrap flex-md-wrap">
+        <div class="flex-grow-1">
+            <app-head-group
+                    (onSort)="changeSort($event)"
+                    [count]="releasesCount"
+                    [defaultSelectedOption]="3"
+                    [page]="currentPage"
+                    [sortOptions]="sortOptions"
+                    [total]="totalReleases"></app-head-group>
+            <!-- d-flex flex-wrap justify-content-around -->
+            <div class="releases-container mt-4">
+                <app-product-card
+                        *ngFor="let release of releases"
+                        [release]="release"
+                        class="my-2 release-item">
+                </app-product-card>
+                <ng-container *ngFor="let item of arrayLoading()">
+                    <app-skeleton-product-box *ngIf="loading$ | async"></app-skeleton-product-box>
+                </ng-container>
+                <i aria-hidden="true"></i>
+                <i aria-hidden="true"></i>
+                <i aria-hidden="true"></i>
+            </div>
+            <app-pagination
+                    [current]="currentPage"
+                    [totalPages]="totalPages"></app-pagination>
+        </div>
+    </div>
+</div>

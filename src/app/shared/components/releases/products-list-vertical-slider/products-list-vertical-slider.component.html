@@ -1,0 +1,62 @@
+<div class="container-releases">
+    <h2 class="slider-title">
+    <span *ngIf="!titleLink">
+      {{ title }}
+    </span>
+        <a *ngIf="titleLink" [href]="titleLink" style="color: #daab28">
+            {{ title }}
+        </a>
+    </h2>
+    <div class="subtitle-container">
+        <p class="subtitle">{{ subtitle }}</p>
+        <a [routerLink]="
+        seeAllLink
+          ? ['/' + seeAllLink]
+          : offers
+          ? ['/whats-new']
+          : ['/releases']
+      "
+           [state]="urlData"
+           class="slider-link">
+            See all
+            <i aria-hidden="true" class="fa fa-angle-right"></i>
+        </a>
+    </div>
+    <owl-carousel-o
+      #owlCar
+      *ngIf="offers && displayImages"
+      [options]="ReleasesInlineConfig">
+        <ng-container *ngFor="let offer of offers; index as i">
+            <ng-template [id]="i" carouselSlide>
+                <app-product-card
+                  [offer]="offer"
+                  [showDate]="false"
+                  [showShop]="showShop">
+                </app-product-card>
+            </ng-template>
+        </ng-container>
+    </owl-carousel-o>
+    <owl-carousel-o
+      #owlCar
+      *ngIf="releases && displayImages"
+      [options]="ReleasesInlineConfig">
+        <ng-container *ngFor="let release of releases; index as i">
+            <ng-template [id]="i" carouselSlide>
+                <app-product-card
+                  [release]="release"
+                  [showDate]="false"
+                  [showStyleName]="showStyleName"></app-product-card>
+            </ng-template>
+        </ng-container>
+    </owl-carousel-o>
+
+    <ng-container *ngIf="!displayImages">
+        <owl-carousel-o [options]="ReleasesInlineConfig" class="product-slick">
+            <ng-container>
+                <ng-template carouselSlide>
+                    <app-skeleton-product-box></app-skeleton-product-box>
+                </ng-template>
+            </ng-container>
+        </owl-carousel-o>
+    </ng-container>
+</div>

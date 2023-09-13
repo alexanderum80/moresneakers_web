@@ -1,0 +1,102 @@
+<div *ngIf="offer" class="offer-item-container my-3">
+    <div class="offer-shop-container">
+        <img
+                [alt]="offer.shopName"
+                [src]="urlToHttps(offer.logo)"
+                [title]="offer.shopName"
+                class="shop-image"/>
+        <p class="item-name">{{ offer.shopName }}</p>
+    </div>
+    <div class="flex-grow-1">
+        <div class="d-flex flex-column">
+            <div *ngFor="let item of offer.offers; index as i">
+                <div class="d-flex justify-content-around align-items-center">
+                    <div class="mx-1 my-3 offer-row-item-small">
+                        <p
+                                [style.color]="getStatusStyle(item.status)"
+                                class="offer-status my-1">
+                            {{ getStatusName(item) }}
+                        </p>
+                        <p
+                                *ngIf="item.releaseTime != null"
+                                class="item-name text-left my-1">
+                            {{ getReleaseDate(item) }}
+                        </p>
+                        <ng-container *ngIf="item.raffleEnd != null">
+                            <p [style.color]="getRaffleStyle()" class="offer-status my-1">
+                                {{
+                                item.status === 'closed' || isRaffleEnded(item)
+                                    ? 'Ended on'
+                                    : 'Ends on'
+                                }}
+                            </p>
+                            <p class="item-name text-left my-1">
+                                {{ getRaffleEndDate(item) }}
+                            </p>
+                        </ng-container>
+                    </div>
+
+                    <div class="m-1 offer-row-item">
+                        <p
+                                *ngIf="item.discountCode"
+                                class="offer-region text-center offer-promotion-code">
+                            Use code: {{ item.discountCode }}
+                        </p>
+                        <p class="offer-region text-center">
+                            {{ getShippingRegions(item) }}
+                        </p>
+                        <p *ngIf="!item.salePercentage" class="offer-price">
+                            {{ item.price | currency : item.currency }}
+                        </p>
+                        <ng-container *ngIf="item.salePercentage">
+                            <p class="offer-price">
+                                {{ getOldPrice(item).toString() | currency : item.currency }}
+                            </p>
+                            <p class="offer-old-price">
+                                {{ item.price | currency : item.currency }}
+                            </p>
+                        </ng-container>
+                    </div>
+
+                    <div
+                            *ngIf="item.links.length > 1; else onlyOneLink"
+                            class="m-1 offer-row-item">
+                        <div class="d-inline-block" ngbDropdown>
+                            <button class="link-button" id="links-dropdown" ngbDropdownToggle>
+                                Get it <i aria-hidden="true" class="fa fa-angle-down fa-lg ml-2"></i>
+                            </button>
+                            <div aria-labelledby="links-dropdown" ngbDropdownMenu>
+                                <a
+                                        *ngFor="let link of item.links"
+                                        [href]="link.bitlyUrl ? link.bitlyUrl : link.trackedUrl"
+                                        ngbDropdownItem
+                                        rel="nofollow"
+                                        target="_blank">
+                                    {{ link.text }}
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <ng-template #onlyOneLink>
+                        <div class="offer-row-item">
+                            <button class="link-button p-0">
+                                <a
+                                        [href]="
+                    item.links[0].bitlyUrl
+                      ? item.links[0].bitlyUrl
+                      : item.links[0].trackedUrl
+                  "
+                                        class="link"
+                                        rel="nofollow"
+                                        target="_blank"
+                                >{{ item.links[0].text }}</a
+                                >
+                            </button>
+                        </div>
+                    </ng-template>
+                </div>
+                <div *ngIf="i < offer.offers.length - 1" class="offer-divider"></div>
+            </div>
+        </div>
+    </div>
+</div>

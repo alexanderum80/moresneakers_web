@@ -1,0 +1,118 @@
+.container-releases {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.scroll {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+}
+
+.scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.item {
+  flex: 0 0 auto;
+}
+
+.item-container {
+  //margin-right: 28px;
+}
+
+.slider-title {
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 24px;
+  line-height: 29px;
+  color: #daab28;
+  text-transform: initial;
+}
+
+.subtitle-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.subtitle {
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 17px;
+  color: #000000;
+}
+
+.slider-link {
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 17px;
+  color: #000000;
+  cursor: pointer;
+}
+
+@media (min-width: 1300px) {
+  .scroll {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    justify-content: space-between;
+    -webkit-overflow-scrolling: touch;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+  }
+
+  .item-container {
+    margin-right: 0;
+  }
+}
+
+@media (max-width: 570px) {
+  .subtitle-container {
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: space-between;
+    margin-top: -30px;
+  }
+
+  .slider-link {
+    text-align: right;
+    margin-bottom: 12px;
+  }
+
+  .slider-title {
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 20px;
+    line-height: 24px;
+    text-transform: initial;
+  }
+}
+
+::ng-deep .owl-prev {
+  left: 2px !important;
+  background: #ffffff !important;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25) !important;
+  width: 32px !important;
+  height: 32px !important;
+  border-radius: 50% !important;
+  padding: 11px !important;
+}
+
+::ng-deep .owl-next {
+  right: 2px !important;
+  background: #ffffff !important;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25) !important;
+  width: 32px !important;
+  height: 32px !important;
+  border-radius: 50% !important;
+  padding: 11px !important;
+}

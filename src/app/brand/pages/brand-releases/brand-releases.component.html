@@ -1,0 +1,38 @@
+<div *ngIf="(brand$ | async)" [infiniteScrollDistance]="2"
+     class="d-flex flex-column h-100"
+     infiniteScroll>
+    <app-navbar></app-navbar>
+    <app-ms-breadcrumb
+            *ngIf="brand$ | async"
+            [breadcrumb]="[
+      { name: 'Brands', url: 'brands' },
+      { name: (brand$ | async).name }
+    ]"></app-ms-breadcrumb>
+    <div class="container h-100">
+        <img *ngIf="(brand$ | async).imgUrl"
+             [alt]="(brand$ | async).name"
+             [src]="(brand$ | async).imgUrl"
+             class="img-brand"/>
+    </div>
+
+    <app-heading
+            [title]="headingTitle$| async"
+            [description]="(headingDescription$| async) ? (headingDescription$ | async) : (brand$ | async).description">
+    </app-heading>
+
+    <div class="my-5" id="filterContainer">
+        <app-releases-group-pagination
+                (changeFilters)="changeFilters($event)"
+                (changeSortOption)="changeSort($event)"
+                [ignoreFilters]="['brands']"
+                [releasesCount]="releasesCount$ | async"
+                [releasesXPage]="pageSize"
+                [releases]="releases$ | async"
+                [totalPages]="totalPages"
+                [totalReleases]="totalReleases$ | async"
+                [urlFilters]="urlFilters$ | async">
+        </app-releases-group-pagination>
+    </div>
+
+    <app-footer></app-footer>
+</div>

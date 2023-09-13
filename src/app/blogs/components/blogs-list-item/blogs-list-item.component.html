@@ -1,0 +1,26 @@
+<div class="row blog-media">
+  <div class="col-xl-6">
+    <div class="blog-left">
+      <a [routerLink]="'/blog/' + blog.slug">
+        <img [alt]="blog.title"
+             [src]="blog.imgUrl"
+             [title]="blog.title"
+             class="img-fluid" />
+      </a>
+    </div>
+  </div>
+  <div class="col-xl-6">
+    <div class="blog-right">
+      <div>
+        <h6>{{ blog.createdAt | date : 'dd MMMM YYYY' }}</h6>
+        <a [routerLink]="'/blog/' + blog.slug">
+          <h4>{{ blog.title }}</h4>
+        </a>
+        <ul class="post-social">
+          <li>Posted By : {{ blog.author }}</li>
+        </ul>
+        <div [innerHTML]="blog.body" [line-truncation]="2"></div>
+      </div>
+    </div>
+  </div>
+</div>

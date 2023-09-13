@@ -1,0 +1,351 @@
+<app-breadcrumb
+  [breadcrumb]="'Product'"
+  [title]="product?.title"></app-breadcrumb>
+<!-- section start -->
+<section class="section-b-space">
+  <div class="collection-wrapper">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4">
+          <owl-carousel-o
+            #owlCar
+            [options]="ProductDetailsMainSliderConfig"
+            class="product-slick">
+            <ng-container *ngFor="let image of product.images; index as i">
+              <ng-template [id]="i" carouselSlide>
+                <div>
+                  <img
+                    [alt]="image.alt"
+                    [defaultImage]="'assets/images/product/placeholder.jpg'"
+                    [lazyLoad]="image.src"
+                    [title]="image.alt"
+                    class="img-fluid" />
+                </div>
+              </ng-template>
+            </ng-container>
+          </owl-carousel-o>
+          <div class="row">
+            <div class="col-12 p-0">
+              <div class="slider-nav">
+                <owl-carousel-o
+                  [options]="ProductDetailsThumbConfig"
+                  class="product-slick">
+                  <ng-container
+                    *ngFor="let image of product.images; index as i">
+                    <ng-template [id]="i" carouselSlide>
+                      <div [class.active]="i == activeSlide" class="owl-thumb">
+                        <img
+                          (click)="owlCar.to((activeSlide = i.toString()))"
+                          [alt]="image.alt"
+                          [defaultImage]="
+                            'assets/images/product/placeholder.jpg'
+                          "
+                          [lazyLoad]="image.src"
+                          [title]="image.alt"
+                          class="img-fluid" />
+                      </div>
+                    </ng-template>
+                  </ng-container>
+                </owl-carousel-o>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="product-right product-description-box">
+            <h2>{{ product.title | titlecase }}</h2>
+            <div class="border-product">
+              <h6 class="product-title">product details</h6>
+              <p>{{ product.description.substring(0, 200) + '...' }}</p>
+            </div>
+            <div class="single-product-tables border-product detail-section">
+              <table>
+                <tbody>
+                  <tr>
+                    <td>Febric:</td>
+                    <td>Chiffon</td>
+                  </tr>
+                  <tr>
+                    <td>Color:</td>
+                    <td>Yellow</td>
+                  </tr>
+                  <tr>
+                    <td>Material:</td>
+                    <td>Crepe printed</td>
+                  </tr>
+                  <tr>
+                    <td>Avalibility:</td>
+                    <td *ngIf="counter <= product.stock">In Stock</td>
+                    <td *ngIf="counter > product.stock">Out of Stock</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="border-product">
+              <h6 class="product-title">share it</h6>
+              <div class="product-icon">
+                <ul class="product-social">
+                  <li>
+                    <a href="https://www.facebook.com/"
+                      ><i class="fa fa-facebook"></i
+                    ></a>
+                  </li>
+                  <li>
+                    <a href="https://plus.google.com/discover"
+                      ><i class="fa fa-google-plus"></i
+                    ></a>
+                  </li>
+                  <li>
+                    <a href="https://twitter.com/"
+                      ><i class="fa fa-twitter"></i
+                    ></a>
+                  </li>
+                  <li>
+                    <a href="https://www.instagram.com/"
+                      ><i class="fa fa-instagram"></i
+                    ></a>
+                  </li>
+                </ul>
+                <form class="d-inline-block">
+                  <button (click)="addToWishlist(product)" class="wishlist-btn">
+                    <i class="fa fa-heart"></i
+                    ><span class="title-font">Add To WishList</span>
+                  </button>
+                </form>
+              </div>
+            </div>
+            <div class="border-product">
+              <h6 class="product-title">100% SECURE PAYMENT</h6>
+              <div class="payment-card-bottom">
+                <ul>
+                  <li>
+                    <a href="javascript:void(0)"
+                      ><img alt="" src="assets/images/icon/visa.png"
+                    /></a>
+                  </li>
+                  <li>
+                    <a href="javascript:void(0)"
+                      ><img alt="" src="assets/images/icon/mastercard.png"
+                    /></a>
+                  </li>
+                  <li>
+                    <a href="javascript:void(0)"
+                      ><img alt="" src="assets/images/icon/paypal.png"
+                    /></a>
+                  </li>
+                  <li>
+                    <a href="javascript:void(0)"
+                      ><img
+                        alt=""
+                        src="assets/images/icon/american-express.png"
+                    /></a>
+                  </li>
+                  <li>
+                    <a href="javascript:void(0)"
+                      ><img alt="" src="assets/images/icon/discover.png"
+                    /></a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="border-product rtl-right-text">
+              <app-countdown [date]="'Apr 21 2021'"></app-countdown>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="product-right product-form-box">
+            <h4>
+              <del *ngIf="product?.discount">{{
+                product?.price * productService.Currency?.price
+                  | currency : productService.Currency?.currency : 'symbol'
+              }}</del>
+              <span>{{ product?.discount }}% off</span>
+            </h4>
+            <h3>
+              {{
+                (product?.price | discount : product) *
+                  productService.Currency?.price
+                  | currency : productService.Currency?.currency : 'symbol'
+              }}
+            </h3>
+            <ul *ngIf="Color(product?.variants).length" class="color-variant">
+              <li
+                (click)="owlCar.to((activeSlide = i.toString()))"
+                *ngFor="let color of Color(product?.variants); index as i"
+                [class.active]="activeSlide == i.toString()"
+                [class]="color"
+                [ngStyle]="{ 'background-color': color }"></li>
+            </ul>
+            <div class="product-description border-product">
+              <h6
+                *ngIf="Size(product.variants).length"
+                class="product-title size-text">
+                select size
+                <span>
+                  <a (click)="SizeChart.openModal()" href="javascrip:void(0)"
+                    >size chart</a
+                  >
+                </span>
+              </h6>
+              <div *ngIf="Size(product.variants).length" class="size-box">
+                <ul>
+                  <li
+                    *ngFor="let size of Size(product.variants)"
+                    [class.active]="selectedSize == size">
+                    <a (click)="selectSize(size)" href="javascript:void(0)">{{
+                      size | titlecase
+                    }}</a>
+                  </li>
+                </ul>
+              </div>
+              <h5 *ngIf="counter <= product.stock" class="avalibility">
+                <span>In Stock</span>
+              </h5>
+              <h5 *ngIf="counter > product.stock" class="avalibility">
+                <span>Out of Stock</span>
+              </h5>
+              <h6 class="product-title">quantity</h6>
+              <div class="qty-box">
+                <div class="input-group">
+                  <span class="input-group-prepend">
+                    <button
+                      (click)="decrement()"
+                      class="btn quantity-left-minus"
+                      data-type="minus"
+                      type="button">
+                      <i class="ti-angle-left"></i>
+                    </button>
+                  </span>
+                  <input
+                    [value]="counter"
+                    class="form-control input-number"
+                    disabled
+                    name="quantity"
+                    type="text" />
+                  <span class="input-group-prepend">
+                    <button
+                      (click)="increment()"
+                      class="btn quantity-right-plus"
+                      data-type="plus"
+                      type="button">
+                      <i class="ti-angle-right"></i>
+                    </button>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div class="product-buttons">
+              <a
+                (click)="addToCart(product)"
+                [class.disabled]="counter > product.stock"
+                class="btn btn-solid"
+                href="javascrip:void(0)"
+                >add to cart</a
+              >
+              <a
+                (click)="buyNow(product)"
+                [class.disabled]="counter > product.stock"
+                class="btn btn-solid"
+                href="javascrip:void(0)"
+                >buy now</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+      <section class="tab-product m-0">
+        <div class="row">
+          <div class="col-sm-12 col-lg-12">
+            <ngb-tabset [type]="'tabs'" class="nav-material">
+              <ngb-tab>
+                <ng-template ngbTabTitle>Description</ng-template>
+                <ng-template ngbTabContent>
+                  <p>{{ product.description }}</p>
+                </ng-template>
+              </ngb-tab>
+              <ngb-tab>
+                <ng-template ngbTabTitle>Video</ng-template>
+                <ng-template ngbTabContent>
+                  <div class="mt-3 text-center">
+                    <iframe
+                      allow="autoplay; encrypted-media"
+                      allowfullscreen
+                      height="315"
+                      src="https://www.youtube.com/embed/BUWzX78Ye_8"
+                      width="560"></iframe>
+                  </div>
+                </ng-template>
+              </ngb-tab>
+              <ngb-tab>
+                <ng-template ngbTabTitle>Write Review</ng-template>
+                <ng-template ngbTabContent>
+                  <form class="theme-form">
+                    <div class="form-row">
+                      <div class="col-md-12">
+                        <div class="media">
+                          <label>Rating</label>
+                          <div class="media-body ml-3">
+                            <div class="rating three-star">
+                              <i class="fa fa-star"></i>
+                              <i class="fa fa-star"></i>
+                              <i class="fa fa-star"></i>
+                              <i class="fa fa-star"></i>
+                              <i class="fa fa-star"></i>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <label for="name">Name</label>
+                        <input
+                          class="form-control"
+                          id="name"
+                          placeholder="Enter Your name"
+                          required
+                          type="text" />
+                      </div>
+                      <div class="col-md-6">
+                        <label for="email">Email</label>
+                        <input
+                          class="form-control"
+                          id="email"
+                          placeholder="Email"
+                          required
+                          type="text" />
+                      </div>
+                      <div class="col-md-12">
+                        <label for="review">Review Title</label>
+                        <input
+                          class="form-control"
+                          id="review"
+                          placeholder="Enter your Review Subjects"
+                          required
+                          type="text" />
+                      </div>
+                      <div class="col-md-12">
+                        <label for="review">Review Title</label>
+                        <textarea
+                          class="form-control"
+                          id="exampleFormControlTextarea1"
+                          placeholder="Wrire Your Testimonial Here"
+                          rows="6"></textarea>
+                      </div>
+                      <div class="col-md-12">
+                        <button class="btn btn-solid" type="submit">
+                          Submit YOur Review
+                        </button>
+                      </div>
+                    </div>
+                  </form>
+                </ng-template>
+              </ngb-tab>
+            </ngb-tabset>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</section>
+<app-size-modal #sizeChart [product]="product"></app-size-modal>
+<!-- Section ends -->

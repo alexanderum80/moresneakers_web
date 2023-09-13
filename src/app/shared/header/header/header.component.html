@@ -1,0 +1,23 @@
+<div
+  *ngIf="imageSrc"
+  [style.background-image]="'url(' + getSrc() + ')'"
+  [style.background-position]="'center center'"
+  [style.background-repeat]="'no-repeat'"
+  [style.background-size]="'contain'"
+  [style.height]="'300px'"
+  [style.width]="'100%'">
+  <div class="container h-100">
+    <div
+      class="d-flex flex-md-row flex-column justify-content-center justify-content-md-start align-items-center h-100">
+      <div
+        class="pb-3 w-100 h-100 d-flex justify-content-center align-items-end">
+        <a
+          [href]="[link]"
+          class="btn btn-outline-dark rounded-0 mb-1 mb-md-2 mb-lg-3 md px-2 px-md-4 py-2 hrs-button font-weight-light text-uppercase"
+          target="_blank">
+          {{ label }}
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

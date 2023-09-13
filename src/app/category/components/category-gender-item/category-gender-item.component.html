@@ -1,0 +1,8 @@
+<div class="container-card d-flex justify-content-center my-4">
+    <a [queryParams]="{ gender: gender }"
+       [routerLink]="['/categories/gender/', urlParamName]"
+       [style.background]="'url(' + imageUrl + ')'"
+       class="image-container d-flex justify-content-center align-items-center">
+        <p class="title">{{ title }}</p>
+    </a>
+</div>

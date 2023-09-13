@@ -1,0 +1,67 @@
+<div *ngIf="release" class="container">
+  <div *ngIf="release.categories" class="row ml-2">
+    <a
+      *ngFor="let category of release.categories"
+      [routerLink]="['/categories/' + nameToSlug(category.name)]"
+      class="categories mr-3 cursor-pointer">
+      {{ category.name }}
+    </a>
+  </div>
+  <h1 class="title">{{ release.name }}</h1>
+  <hr class="solid" />
+  <section>
+    <p class="subtitle" id="details">Details</p>
+    <p *ngIf="release.style && release.style.BrandModel" class="detail-field">
+      Brand:
+      <a [routerLink]="['/brands', nameToSlug(release.style.BrandModel.name)]"
+        ><strong class="field-value-clicleable">{{
+          release.style.BrandModel.name
+        }}</strong></a
+      >
+    </p>
+    <p *ngIf="release.collection" class="detail-field">
+      Collection:
+      <a [routerLink]="['/collections', nameToSlug(release.collection.name)]"
+        ><strong class="field-value-clicleable">{{
+          release.collection.name
+        }}</strong></a
+      >
+    </p>
+    <p *ngIf="release.style" class="detail-field">
+      Style:
+      <a [routerLink]="['/styles', nameToSlug(release.style.name)]"
+        ><strong class="field-value-clicleable">{{
+          release.style.name
+        }}</strong></a
+      >
+    </p>
+    <p class="detail-field">
+      Supplier Color:
+      <strong *ngIf="release.supplierColor" class="field-value">{{
+        release.supplierColor
+      }}</strong>
+    </p>
+    <p class="detail-field">
+      Style Code:
+      <strong *ngIf="release.sku" class="field-value">{{ release.sku }}</strong>
+    </p>
+    <p *ngIf="release.releaseDate" class="detail-field">
+      Release Date:
+      <strong class="field-value">{{
+        release.releaseDate | date : 'dd/MM/YYYY'
+      }}</strong>
+    </p>
+    <p class="detail-field">
+      Retail Price:
+      <strong class="field-value">{{ getPriceString(release) }}</strong>
+    </p>
+    <p *ngIf="release.gender" class="detail-field">
+      Gender:
+      <strong class="field-value">{{ release.gender }}</strong>
+    </p>
+  </section>
+  <section *ngIf="release.description">
+    <p class="subtitle">About this product</p>
+    <p [innerHtml]="release.description" class="detail-description"></p>
+  </section>
+</div>

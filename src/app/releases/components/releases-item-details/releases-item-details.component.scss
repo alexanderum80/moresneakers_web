@@ -1,0 +1,113 @@
+p {
+  margin: 0px;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.categories {
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 15px;
+  text-decoration-line: underline;
+  text-transform: uppercase;
+
+  color: #000000;
+}
+
+.title {
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 200;
+  font-size: 48px;
+  line-height: 64px;
+  text-transform: none !important;
+  color: #000000;
+}
+
+hr.solid {
+  margin-left: 0px;
+  width: 85%;
+  border-top: 1px solid #e5e5e5;
+}
+
+.subtitle {
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 200;
+  font-size: 28px;
+  line-height: 44px;
+  text-transform: none !important;
+  margin-bottom: 16px;
+}
+
+.detail-field {
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 24px;
+}
+
+.field-value-clicleable {
+  color: #000;
+  text-decoration: underline;
+}
+
+.field-value-clicleable:hover {
+  color: #daab28;
+  cursor: pointer;
+}
+
+.field-value {
+  color: #000;
+}
+
+.detail-description {
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 24px;
+  color: #000000;
+}
+
+@media (max-width: 766px) {
+  .title {
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 24px;
+    line-height: 36px;
+    color: #000000;
+    margin-top: 10px;
+  }
+
+  .subtitle {
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 24px;
+    line-height: 29px;
+    text-transform: uppercase;
+    color: #000000;
+  }
+
+  #details {
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 20px;
+    /* identical to box height */
+    text-transform: uppercase;
+    color: #000000;
+  }
+
+  .categories {
+    margin-top: 20px;
+  }
+}

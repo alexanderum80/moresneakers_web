@@ -1,0 +1,20 @@
+<div class="row">
+  <div *ngFor="let blog of blogs" class="col-12 col-md-4 my-4 mt-md-0">
+    <a [routerLink]="['/blog', blog.slug]">
+      <div class="basic-effect d-flex justify-content-center">
+        <img
+          [alt]="blog.title"
+          [src]="blog.imgUrl"
+          [title]="blog.title"
+          class="img-fluid img-blog" />
+        <span></span>
+      </div>
+    </a>
+    <div class="blog-details border-bottom border-left border-right">
+      <h4>{{ blog.createdAt | date : 'd MMMM yyyy' }}</h4>
+      <a [routerLink]="['/blog', blog.slug]">
+        <p>{{ blog.title }}</p>
+      </a>
+    </div>
+  </div>
+</div>

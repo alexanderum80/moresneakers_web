@@ -1,0 +1,12 @@
+<p class="title">Inline Releases</p>
+<owl-carousel-o #owlCar *ngIf="releases" [options]="ReleasesInlineConfig">
+  <ng-container *ngFor="let release of releases; index as i">
+    <ng-template [id]="i" [width]="itemWidth" carouselSlide>
+      <app-product-card [release]="release" [showDate]="false">
+      </app-product-card>
+    </ng-template>
+  </ng-container>
+  <ng-container *ngIf="loading$ | async">
+    <app-skeleton-product-box *ngFor="let item of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]"></app-skeleton-product-box>
+  </ng-container>
+</owl-carousel-o>

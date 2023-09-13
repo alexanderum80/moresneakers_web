@@ -1,0 +1,232 @@
+<app-breadcrumb
+  [breadcrumb]="'Product'"
+  [title]="product?.title"></app-breadcrumb>
+<section class="section-b-space">
+  <div class="collection-wrapper ratio_asos">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6">
+          <div class="row product_image_4">
+            <div *ngFor="let image of product.images; index as i" class="col-6">
+              <div>
+                <img
+                  [alt]="image.alt"
+                  [defaultImage]="'assets/images/product/placeholder.jpg'"
+                  [lazyLoad]="image.src"
+                  [title]="image.alt"
+                  class="img-fluid" />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6 rtl-text">
+          <div class="product-right">
+            <h2>{{ product?.title }}</h2>
+            <h4>
+              <del *ngIf="product?.discount">{{
+                product?.price * productService.Currency?.price
+                  | currency : productService.Currency?.currency : 'symbol'
+              }}</del>
+              <span>{{ product?.discount }}% off</span>
+            </h4>
+            <h3>
+              {{
+                (product?.price | discount : product) *
+                  productService.Currency?.price
+                  | currency : productService.Currency?.currency : 'symbol'
+              }}
+            </h3>
+            <ul *ngIf="Color(product?.variants).length" class="color-variant">
+              <li
+                *ngFor="let color of Color(product?.variants); index as i"
+                [class]="color"
+                [ngStyle]="{ 'background-color': color }"></li>
+            </ul>
+            <app-stock-inventory [stock]="product.stock"></app-stock-inventory>
+            <div class="product-description border-product">
+              <h6
+                *ngIf="Size(product.variants).length"
+                class="product-title size-text">
+                select size
+                <span>
+                  <a (click)="SizeChart.openModal()" href="javascrip:void(0)"
+                    >size chart</a
+                  >
+                </span>
+              </h6>
+              <div *ngIf="Size(product.variants).length" class="size-box">
+                <ul>
+                  <li
+                    *ngFor="let size of Size(product.variants)"
+                    [class.active]="selectedSize == size">
+                    <a (click)="selectSize(size)" href="javascript:void(0)">{{
+                      size | titlecase
+                    }}</a>
+                  </li>
+                </ul>
+              </div>
+              <h5 *ngIf="counter <= product.stock" class="avalibility">
+                <span>In Stock</span>
+              </h5>
+              <h5 *ngIf="counter > product.stock" class="avalibility">
+                <span>Out of Stock</span>
+              </h5>
+              <h6 class="product-title">quantity</h6>
+              <div class="qty-box">
+                <div class="input-group">
+                  <span class="input-group-prepend">
+                    <button
+                      (click)="decrement()"
+                      class="btn quantity-left-minus"
+                      data-type="minus"
+                      type="button">
+                      <i class="ti-angle-left"></i>
+                    </button>
+                  </span>
+                  <input
+                    [value]="counter"
+                    class="form-control input-number"
+                    disabled
+                    name="quantity"
+                    type="text" />
+                  <span class="input-group-prepend">
+                    <button
+                      (click)="increment()"
+                      class="btn quantity-right-plus"
+                      data-type="plus"
+                      type="button">
+                      <i class="ti-angle-right"></i>
+                    </button>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div class="product-buttons">
+              <a
+                (click)="addToCart(product)"
+                [class.disabled]="counter > product.stock"
+                class="btn btn-solid"
+                href="javascrip:void(0)"
+                >add to cart</a
+              >
+              <a
+                (click)="buyNow(product)"
+                [class.disabled]="counter > product.stock"
+                class="btn btn-solid"
+                href="javascrip:void(0)"
+                >buy now</a
+              >
+            </div>
+            <div class="border-product">
+              <h6 class="product-title">product details</h6>
+              <p>{{ product.description.substring(0, 200) + '...' }}</p>
+            </div>
+            <div class="border-product">
+              <h6 class="product-title">share it</h6>
+              <div class="product-icon">
+                <app-social></app-social>
+                <form class="d-inline-block">
+                  <button (click)="addToWishlist(product)" class="wishlist-btn">
+                    <i class="fa fa-heart"></i>
+                    <span class="title-font">Add To WishList</span>
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <section class="tab-product m-0">
+        <div class="row">
+          <div class="col-sm-12 col-lg-12">
+            <ngb-tabset [type]="'tabs'" class="nav-material">
+              <ngb-tab>
+                <ng-template ngbTabTitle>Description</ng-template>
+                <ng-template ngbTabContent>
+                  <p>{{ product.description }}</p>
+                </ng-template>
+              </ngb-tab>
+              <ngb-tab>
+                <ng-template ngbTabTitle>Video</ng-template>
+                <ng-template ngbTabContent>
+                  <div class="mt-3 text-center">
+                    <iframe
+                      allow="autoplay; encrypted-media"
+                      allowfullscreen
+                      height="315"
+                      src="https://www.youtube.com/embed/BUWzX78Ye_8"
+                      width="560"></iframe>
+                  </div>
+                </ng-template>
+              </ngb-tab>
+              <ngb-tab>
+                <ng-template ngbTabTitle>Write Review</ng-template>
+                <ng-template ngbTabContent>
+                  <form class="theme-form">
+                    <div class="form-row">
+                      <div class="col-md-12">
+                        <div class="media">
+                          <label>Rating</label>
+                          <div class="media-body ml-3">
+                            <div class="rating three-star">
+                              <i class="fa fa-star"></i>
+                              <i class="fa fa-star"></i>
+                              <i class="fa fa-star"></i>
+                              <i class="fa fa-star"></i>
+                              <i class="fa fa-star"></i>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <label for="name">Name</label>
+                        <input
+                          class="form-control"
+                          id="name"
+                          placeholder="Enter Your name"
+                          required
+                          type="text" />
+                      </div>
+                      <div class="col-md-6">
+                        <label for="email">Email</label>
+                        <input
+                          class="form-control"
+                          id="email"
+                          placeholder="Email"
+                          required
+                          type="text" />
+                      </div>
+                      <div class="col-md-12">
+                        <label for="review">Review Title</label>
+                        <input
+                          class="form-control"
+                          id="review"
+                          placeholder="Enter your Review Subjects"
+                          required
+                          type="text" />
+                      </div>
+                      <div class="col-md-12">
+                        <label for="review">Review Title</label>
+                        <textarea
+                          class="form-control"
+                          id="exampleFormControlTextarea1"
+                          placeholder="Wrire Your Testimonial Here"
+                          rows="6"></textarea>
+                      </div>
+                      <div class="col-md-12">
+                        <button class="btn btn-solid" type="submit">
+                          Submit YOur Review
+                        </button>
+                      </div>
+                    </div>
+                  </form>
+                </ng-template>
+              </ngb-tab>
+            </ngb-tabset>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</section>
+<app-size-modal #sizeChart [product]="product"></app-size-modal>

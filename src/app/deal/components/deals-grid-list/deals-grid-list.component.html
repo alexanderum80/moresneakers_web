@@ -1,0 +1,15 @@
+<div [@listAnim]="deals.length" class="d-flex justify-content-start deals-container flex-wrap mt-4">
+    <app-deals-card
+            *ngFor="let deal of deals"
+            @cardAnim
+            [deal]="deal"
+            class="m-3">
+    </app-deals-card>
+    <ng-container *ngIf="loading$ | async">
+        <app-skeleton-card *ngFor="let item of [1, 2, 3, 4, 5, 6, 7, 8]"></app-skeleton-card>
+    </ng-container>
+</div>
+<app-pagination
+        [current]="currentPage"
+        [totalPages]="totalPages">
+</app-pagination>

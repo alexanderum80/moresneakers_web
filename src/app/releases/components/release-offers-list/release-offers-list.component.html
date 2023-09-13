@@ -1,0 +1,45 @@
+<div class="d-flex justify-content-center">
+    <div class="offer-list-container">
+        <h2 class="title">Where to buy</h2>
+        <div class="custom-nav-link">
+            <ngb-tabset
+                    (tabChange)="changeShipping($event)"
+                    [justify]="'start'"
+                    [type]="'pills'"
+                    class="tabs tab-title">
+                <ngb-tab *ngFor="let tab of tabs" [id]="tab.toLowerCase()">
+                    <ng-template class="custom-tab-title" ngbTabTitle>{{
+                        tab
+                        }}</ng-template>
+                    <ng-template ngbTabContent>
+                        <app-only-marketplace *ngIf="marketPlaceOffers && !offersAvailable && allSoldOut"
+                                              [releasesText]="releasesText2">
+                        </app-only-marketplace>
+                        <app-only-marketplace *ngIf="allSoldOut && marketPlaceOffers && offersAvailable"
+                                              [releasesText]="releasesText">
+                        </app-only-marketplace>
+                        <div *ngIf="!loading">
+                            <div *ngFor="let offerRegion of offerGrouped" class="offer-release-details">
+                                <section *ngIf="offerRegion.offer.length > 0">
+                                    <h3>{{ offerRegion.region }}</h3>
+                                    <app-release-details-offer-item
+                                            *ngFor="let offer of offerRegion.offer"
+                                            [offer]="offer">
+                                    </app-release-details-offer-item>
+                                </section>
+                            </div>
+                        </div>
+                        <div *ngIf="offers?.length == 0"
+                             class="d-flex justify-content-center align-items-center w-100 my-5">
+                            <h3 class="not-found">No result found</h3>
+                        </div>
+                        <div *ngIf="loading">
+                            <app-skeleton-offer-item *ngFor="let item of [1, 2, 3, 4]" class="w-100">
+                            </app-skeleton-offer-item>
+                        </div>
+                    </ng-template>
+                </ngb-tab>
+            </ngb-tabset>
+        </div>
+    </div>
+</div>

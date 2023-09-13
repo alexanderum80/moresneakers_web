@@ -1,0 +1,48 @@
+p {
+  margin: 0;
+}
+
+.header-group-container {
+  border-top: 1px solid #e5e5e5;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.text-group {
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 14px;
+  color: #000000;
+}
+
+.custom-dropdown {
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 14px;
+  color: #000000;
+  border: none;
+  background-color: #fff;
+}
+
+.dropdown-toggle::after {
+  display: none;
+}
+
+.bordered {
+  border-left: 1px solid #e5e5e5;
+  border-right: 1px solid #e5e5e5;
+  padding: 0 10%;
+}
+
+.divider {
+  height: 1px;
+  background-color: #e5e5e5;
+  width: 100%;
+}
+
+.myDropDownItemSelected {
+  font-weight: 550;
+}

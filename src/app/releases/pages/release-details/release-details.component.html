@@ -1,0 +1,51 @@
+<div *ngIf="displayRelease" class="d-flex flex-column h-100">
+  <app-navbar></app-navbar>
+  <app-partnership></app-partnership>
+
+  <app-ms-breadcrumb
+    *ngIf="release$ | async"
+    [breadcrumb]="[
+      { name: 'Releases', url: 'releases' },
+      { name: (release$ | async).name, style: 'text-transform: none;' }
+    ]"></app-ms-breadcrumb>
+
+  <div class="container mt-5">
+    <div class="row">
+      <div class="col-lg-6 col-md-12 col-sm-12">
+        <app-releases-carousel
+          *ngIf="release$ | async"
+          [images]="(release$ | async).images"
+          [otherAlt]="otherAlt"></app-releases-carousel>
+      </div>
+      <div class="col-lg-6 col-md-12 col-sm-12">
+        <app-releases-item-details
+          [release]="release$ | async"></app-releases-item-details>
+      </div>
+    </div>
+  </div>
+
+  <div class="container mt-5">
+    <div class="row">
+      <div class="col-12">
+        <app-release-offers-list
+          (onChangeShipping)="changeShipping($event)"
+          [isAllSoldOut]="isAllSoldOut"
+          [offers]="offers$ | async"
+          [releasesText]="releasesText"
+          [releasesText2]="releasesText2"
+          class="mt-5"></app-release-offers-list>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="relatedReleases" class="container my-5">
+    <app-products-list-vertical-slider
+      *ngIf="release$ | async"
+      [releases]="relatedReleases"
+      [seeAllLink]="'styles/' + nameToSlug((release$ | async).style?.name)"
+      [subtitle]="'You may also like this sneakers'"
+      [title]="'SIMILAR PRODUCTS'"></app-products-list-vertical-slider>
+  </div>
+
+  <app-footer></app-footer>
+</div>

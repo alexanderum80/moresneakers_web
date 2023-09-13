@@ -1,0 +1,210 @@
+<div class="navbar">
+    <a (click)="leftMenuToggle()" href="javascript:void(0)">
+        <div class="bar-style">
+            <i aria-hidden="true" class="fa fa-bars sidebar-bar"></i>
+        </div>
+    </a>
+    <div
+            [class.openSide]="navServices?.leftMenuToggle"
+            class="sidenav"
+            id="mySidenav">
+        <a
+                (click)="leftMenuToggle()"
+                (mouseover)="onHover(false)"
+                class="sidebar-overlay"
+                href="javascript:void(0)"></a>
+        <nav id="unset">
+            <div (click)="leftMenuToggle()">
+                <div class="sidebar-back text-left">
+                    <i aria-hidden="true" class="fa fa-angle-left pr-2"></i> Back
+                </div>
+            </div>
+            <ul class="sidebar-menu" id="sub-menu">
+                <li
+                        (mouseover)="onHover(!!menuItem.children)"
+                        *ngFor="let menuItem of menuItems">
+                    <!-- Sub -->
+                    <a
+                            (click)="toggletNavActive(menuItem)"
+                            *ngIf="menuItem.type === 'sub'"
+                            href="javascript:void(0)">
+                        {{ menuItem.title }}
+                        <span *ngIf="menuItem.children" class="sub-arrow"></span>
+                    </a>
+                    <!-- Link -->
+                    <a *ngIf="menuItem.type === 'link'" [routerLink]="menuItem.path">
+                        {{ menuItem.title }}
+                        <span *ngIf="menuItem.children" class="sub-arrow"></span>
+                    </a>
+                    <!-- External Link -->
+                    <a *ngIf="menuItem.type === 'extLink'" href="{{ menuItem.path }}">
+                        {{ menuItem.title }}
+                        <span *ngIf="menuItem.children" class="sub-arrow"></span>
+                    </a>
+                    <!-- External Tab Link -->
+                    <a *ngIf="menuItem.type === 'extTabLink'" href="{{ menuItem.path }}">
+                        {{ menuItem.title }}
+                        <span *ngIf="menuItem.children" class="sub-arrow"></span>
+                    </a>
+                    <!-- 2nd Level Menu -->
+                    <ul
+                            *ngIf="menuItem.children"
+                            [class.opensub1]="menuItem.active"
+                            [class]="menuItem.megaMenu ? 'mega-menu clothing-menu' : ''">
+                        <!-- Simple Menu Start-->
+                        <ng-container *ngIf="!menuItem.megaMenu">
+                            <li *ngFor="let childrenItem of menuItem.children">
+                                <!-- Link -->
+                                <a
+                                        *ngIf="childrenItem.type === 'link'"
+                                        [routerLink]="childrenItem.path"
+                                        class="has-submenu">
+                                    {{ childrenItem.title }}
+                                </a>
+                                <!-- External Link -->
+                                <a
+                                        *ngIf="childrenItem.type === 'extLink'"
+                                        href="{{ !childrenItem.type ? null : childrenItem.path }}">
+                                    {{ childrenItem.title }}
+                                </a>
+                                <!-- External Tab Link -->
+                                <a
+                                        *ngIf="childrenItem.type === 'extTabLink'"
+                                        href="{{ !childrenItem.type ? null : childrenItem.path }}"
+                                        target="_blank">
+                                    {{ childrenItem.title }}
+                                </a>
+                                <!-- 3rd Level Menu -->
+                                <ul *ngIf="childrenItem.children">
+                                    <li *ngFor="let childrenSubItem of childrenItem.children">
+                                        <!-- Link -->
+                                        <a
+                                                *ngIf="childrenSubItem.type === 'link'"
+                                                [routerLink]="childrenSubItem.path">
+                                            {{ childrenSubItem.title }}
+                                        </a>
+                                        <!-- External Link -->
+                                        <a
+                                                *ngIf="childrenSubItem.type === 'extLink'"
+                                                href="{{ childrenSubItem.path }}">
+                                            {{ childrenSubItem.title }}
+                                        </a>
+                                        <!-- External Tab Link -->
+                                        <a
+                                                *ngIf="childrenSubItem.type === 'extTabLink'"
+                                                href="{{ childrenSubItem.path }}"
+                                                target="_blank">
+                                            {{ childrenSubItem.title }}
+                                        </a>
+                                        <!-- 4th Level Menu -->
+                                        <ul *ngIf="childrenSubItem.children">
+                                            <li
+                                                    *ngFor="
+                          let childrenSubSubItem of childrenSubItem.children
+                        ">
+                                                <!-- Link -->
+                                                <a
+                                                        *ngIf="childrenSubSubItem.type === 'link'"
+                                                        [routerLink]="childrenSubSubItem.path">
+                                                    {{ childrenSubSubItem.title }}
+                                                </a>
+                                                <!-- External Link -->
+                                                <a
+                                                        *ngIf="childrenSubSubItem.type === 'extLink'"
+                                                        href="{{ childrenSubSubItem.path }}">
+                                                    {{ childrenSubSubItem.title }}
+                                                </a>
+                                                <!-- External Tab Link -->
+                                                <a
+                                                        *ngIf="childrenSubSubItem.type === 'extTabLink'"
+                                                        href="{{ childrenSubSubItem.path }}"
+                                                        target="_blank">
+                                                    {{ childrenSubSubItem.title }}
+                                                </a>
+                                                <!-- 5th Level Menu -->
+                                                <ul *ngIf="childrenSubSubItem.children">
+                                                    <li
+                                                            *ngFor="
+                              let childrenSubSubSubItem of childrenSubSubItem.children
+                            ">
+                                                        <!-- Link -->
+                                                        <a
+                                                                *ngIf="childrenSubSubSubItem.type === 'link'"
+                                                                [routerLink]="childrenSubSubSubItem.path">
+                                                            {{ childrenSubSubSubItem.title }}
+                                                        </a>
+                                                        <!-- External Link -->
+                                                        <a
+                                                                *ngIf="childrenSubSubSubItem.type === 'extLink'"
+                                                                href="{{ childrenSubSubSubItem.path }}">
+                                                            {{ childrenSubSubSubItem.title }}
+                                                        </a>
+                                                        <!-- External Tab Link -->
+                                                        <a
+                                                                *ngIf="
+                                childrenSubSubSubItem.type === 'extTabLink'
+                              "
+                                                                href="{{ childrenSubSubSubItem.path }}"
+                                                                target="_blank">
+                                                            {{ childrenSubSubSubItem.title }}
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ng-container>
+                        <!-- Simple Menu End-->
+
+                        <!-- Mega Menu Start-->
+                        <ng-container *ngIf="menuItem.megaMenu">
+                            <li>
+                                <div class="row m-0">
+                                    <div
+                                            *ngFor="let childrenItem of menuItem.children"
+                                            class="col-xl-4">
+                                        <div class="link-section">
+                                            <h5>{{ childrenItem.title }}</h5>
+                                            <ul>
+                                                <li
+                                                        *ngFor="let childrenSubItem of childrenItem.children">
+                                                    <!-- Link -->
+                                                    <a
+                                                            *ngIf="childrenSubItem.type === 'link'"
+                                                            [routerLink]="childrenSubItem.path">
+                                                        {{ childrenSubItem.title }}
+                                                    </a>
+                                                    <!-- External Link -->
+                                                    <a
+                                                            *ngIf="childrenSubItem.type === 'extLink'"
+                                                            href="{{ childrenSubItem.path }}">
+                                                        {{ childrenSubItem.title }}
+                                                    </a>
+                                                    <!-- External Tab Link -->
+                                                    <a
+                                                            *ngIf="childrenSubItem.type === 'extTabLink'"
+                                                            href="{{ childrenSubItem.path }}"
+                                                            target="_blank">
+                                                        {{ childrenSubItem.title }}
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-4">
+                                        <a [routerLink]="['/home/one']" class="mega-menu-banner"
+                                        ><img alt="" class="img-fluid" src=""
+                                        /></a>
+                                    </div>
+                                </div>
+                            </li>
+                        </ng-container>
+                        <!-- Mega Menu End-->
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>

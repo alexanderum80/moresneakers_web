@@ -1,0 +1,8 @@
+<div class="container border-top border-bottom py-3">
+  <app-ms-letters-filter-bar
+    (onSelectedFilter)="setLetterFilter($event)"
+    [selected]="selected$ | async"></app-ms-letters-filter-bar>
+</div>
+<div class="container">
+  <app-shops-grid-list [shops]="shops"></app-shops-grid-list>
+</div>

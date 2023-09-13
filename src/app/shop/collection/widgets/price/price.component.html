@@ -1,0 +1,17 @@
+<!-- price filter start here -->
+<div [class.open]="collapse" class="collection-collapse-block border-0">
+    <h3 (click)="collapse = !collapse" class="collapse-block-title">price</h3>
+    <div class="collection-collapse-block-content">
+        <div class="collection-brand-filter">
+            <div class="mt-2">
+                <ngx-slider
+                        (userChangeEnd)="appliedFilter($event)"
+                        *ngIf="isBrowser"
+                        [(highValue)]="max"
+                        [(value)]="min"
+                        [options]="options">
+                </ngx-slider>
+            </div>
+        </div>
+    </div>
+</div>

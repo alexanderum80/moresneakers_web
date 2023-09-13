@@ -1,0 +1,34 @@
+<!-- breadcrumb start -->
+<div class="ms-breadcrumb breadcrumb-section py-3 py-md-1">
+  <div class="container">
+    <div class="d-flex flex-column align-items-center align-items-md-start">
+      <div class="page-title d-md-none">
+        <p>{{ title }}</p>
+      </div>
+      <nav aria-label="breadcrumb" class="theme-breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a [routerLink]="'/'">Home</a>
+          </li>
+          <li
+            *ngFor="let item of breadcrumb; let i = index"
+            [ngClass]="
+              i == breadcrumb.length - 1
+                ? 'breadcrumb-item active'
+                : 'breadcrumb-item cursor-pointer'
+            "
+            [style]="item.style ? item.style : ''"
+            aria-current="page">
+            <a *ngIf="item.url; else sinHref" [routerLink]="'/' + item.url">
+              {{ item.name }}
+            </a>
+            <ng-template #sinHref>
+              {{ item.name }}
+            </ng-template>
+          </li>
+        </ol>
+      </nav>
+    </div>
+  </div>
+</div>
+<!-- breadcrumb End -->

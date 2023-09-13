@@ -1,0 +1,31 @@
+.post-text {
+  position: relative;
+  overflow-x: hidden;
+  max-width: 97%;
+}
+
+.post-text img {
+  width: 100% !important;
+  height: auto !important;
+  max-width: 700px !important;
+}
+
+.header-title {
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 200;
+  font-size: 48px;
+  line-height: 64px;
+  /* or 133% */
+  text-transform: none;
+  color: #000000;
+  padding-top: 8px;
+}
+
+@media (max-width: 480px) {
+  .header-title {
+    font-weight: 200;
+    font-size: 32px;
+    line-height: 48px;
+  }
+}

@@ -1,0 +1,17 @@
+<ul class="product-filter-tags w-100 d-flex align-items-center">
+  <li *ngFor="let tag of tags; let index = index" class="mr-1">
+    <a class="filter_tag" href="javascript:void(0)">
+      <span class="d-flex align-items-center">
+        <span>
+          {{ tag }}
+        </span>
+        <i (click)="removeTag(index)" class="fa fa-close ml-2"></i>
+      </span>
+    </a>
+  </li>
+  <li *ngIf="tags.length > 0" class="clear_filter">
+    <a (click)="removeAllTags()" class="clear_filter" href="javascript:void(0)">
+      Clear all
+    </a>
+  </li>
+</ul>

@@ -1,0 +1,57 @@
+<div *ngIf="product" class="product-card m-3">
+  <a [routerLink]="generateNavigator()">
+    <div class="wrapper position-relative d-flex flex-column">
+      <div class="image-wrapper border-bottom">
+        <img
+          [alt]="product.releaseName + ' ' + product.sku"
+          [src]="getSrc()"
+          [title]="product.releaseName + ' ' + product.sku" />
+      </div>
+      <div class="content-wrapper d-flex flex-column p-3">
+        <h6 class="subtitle">{{ product.releaseName }}</h6>
+
+        <div *ngIf="showShop && product.shopName" class="d-flex pb-3">
+          <span class="shop">{{ product.shopName }}</span>
+        </div>
+
+        <div
+          class="d-flex justify-content-between align-items-center height-45">
+          <!--Statuses classes: coming-soon,sold-out, restock, sale && available -->
+          <span [ngClass]="product.status" class="status">{{
+            getStatus(product.status)
+            }}</span>
+          <!--Statuses classes: coming-soon,sold-out, restock, sale && available -->
+
+          <span *ngIf="!product.salePercentage" class="price">{{
+            product.price | currency : product.currency
+            }}</span>
+
+          <div *ngIf="product.salePercentage" class="d-flex flex-column">
+            <span class="sale-price m-0 p-0">
+              {{ product.salePrice | currency : product.currency }}
+            </span>
+            <span class="old-price m-0 p-0">
+              {{ product.price | currency : product.currency }}
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="brand-logo-wrapper">
+        <img
+          [alt]="urlToHttps(product.brandName)"
+          [src]="urlToHttps(product.brandImage)"
+          class="brand-logo" />
+      </div>
+      <div *ngIf="product.hot" class="hot-img-wrapper">
+        <img
+          alt="hot"
+          class="brand-logo"
+          src="assets/images/hot-release-fire.svg" />
+      </div>
+      <div *ngIf="showDate" class="release-date-wrapper d-flex flex-column">
+        <span class="month">{{ product.productDate | date : 'MMM' }}</span>
+        <span class="day">{{ product.productDate | date : 'dd' }}</span>
+      </div>
+    </div>
+  </a>
+</div>

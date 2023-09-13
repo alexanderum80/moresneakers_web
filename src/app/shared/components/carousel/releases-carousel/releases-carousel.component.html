@@ -1,0 +1,73 @@
+<!-- section start -->
+<div *ngIf="images && displayImages; else defaultCarousel" class="row">
+  <div class="col-lg-12">
+    <ngx-image-gallery [conf]="conf" [images]="imagesG"> </ngx-image-gallery>
+    <div *ngIf="showBackButton && isBrowser" class="back-container mb-1">
+      <li class="fa fa-angle-left fa-2x"></li>
+      <p (click)="goBack()" class="back ml-1">Back</p>
+    </div>
+    <owl-carousel-o
+      #owlCar
+      [options]="ProductDetailsMainSliderConfig"
+      class="product-slick">
+      <ng-container *ngFor="let image of images; index as i">
+        <ng-template [id]="i" carouselSlide>
+          <img
+            (click)="openGallery(i)"
+            [alt]="image.fileName || otherAlt"
+            [defaultImage]="'assets/images/product/placeholder.jpg'"
+            [lazyLoad]="image.imgUrl"
+            [title]="image.fileName || otherAlt"
+            class="img-fluid main-image-container" />
+        </ng-template>
+      </ng-container>
+    </owl-carousel-o>
+    <div *ngIf="images.length > 1" class="col-12 p-0 carousel-thumb">
+      <div class="slider-nav">
+        <owl-carousel-o
+          [options]="ProductDetailsThumbConfig"
+          class="product-slick">
+          <ng-container *ngFor="let image of images; index as i">
+            <ng-template [id]="i" carouselSlide>
+              <div
+                [class.active]="i == activeSlide"
+                class="owl-thumb secondary-carousel">
+                <div class="secoundary-image-container">
+                  <div
+                    *ngIf="i == activeSlide"
+                    class="active-slider-border"></div>
+                  <img
+                    (click)="owlCar.to((activeSlide = i.toString()))"
+                    [alt]="image.fileName || otherAlt"
+                    [defaultImage]="'assets/images/product/placeholder.jpg'"
+                    [lazyLoad]="image.imgUrl"
+                    [title]="image.fileName || otherAlt"
+                    class="img-fluid" />
+                </div>
+              </div>
+            </ng-template>
+          </ng-container>
+        </owl-carousel-o>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #defaultCarousel>
+  <owl-carousel-o
+    [options]="ProductDetailsMainSliderConfig"
+    class="product-slick">
+    <ng-container *ngFor="let image of images; index as i">
+      <ng-template [id]="i" carouselSlide>
+        <img
+          [alt]="image.fileName || otherAlt"
+          [defaultImage]="'assets/images/product/placeholder.jpg'"
+          [lazyLoad]="image.imgUrl"
+          [title]="image.fileName || otherAlt"
+          class="img-fluid main-image-container" />
+      </ng-template>
+    </ng-container>
+  </owl-carousel-o>
+</ng-template>
+
+<!-- Section ends -->

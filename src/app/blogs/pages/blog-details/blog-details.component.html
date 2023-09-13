@@ -1,0 +1,42 @@
+<app-navbar></app-navbar>
+<ng-container *ngIf="blog">
+  <app-ms-breadcrumb
+    [breadcrumb]="[
+      { name: 'Blog', url: '/blog' },
+      { name: blog.title }
+    ]"></app-ms-breadcrumb>
+  <!--section start-->
+  <section class="blog-detail-page section-b-space">
+    <div class="container">
+      <div class="row">
+        <h1 class="col-sm-12 header-title">{{ blog.title }}</h1>
+        <div class="col-sm-12 blog-detail">
+          <img
+            [alt]="blog.title"
+            [src]="blog.imgUrl"
+            [title]="blog.title"
+            class="img-fluid" />
+          <ul class="post-social">
+            <li>{{ blog.createdAt | date : 'dd MMMM YYYY' }}</li>
+            <li>Posted By : {{ blog.author }}</li>
+            <!-- <li><i class="fa fa-heart"></i> 5 Hits</li>
+                        <li><i class="fa fa-comments"></i> 10 Comment</li> -->
+          </ul>
+          <div class="post-text">
+            <div [innerHTML]="blog.body | safeHtml" class="w-100"></div>
+          </div>
+        </div>
+
+        <div class="col-12">
+          <app-releases-carousel
+            *ngIf="images"
+            [images]="images"
+            [otherAlt]="otherAlt"
+            [showBackButton]="false"></app-releases-carousel>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!--Section ends-->
+</ng-container>
+<app-footer></app-footer>

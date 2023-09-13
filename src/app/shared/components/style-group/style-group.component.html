@@ -1,0 +1,172 @@
+<div class="container">
+  <div class="d-flex flex-lg-nowrap flex-md-wrap">
+    <div class="d-flex flex-column mr-4 display-only-hight-resolutions">
+      <div class="border-filter-box" *ngIf="genderFilters">
+        <app-ms-filter-sidebar [isRadio]="true"
+                               [defaultValue]="'All'"
+                               [filterTitle]="'Genders'"
+                               [selectedOptions]="selectedGenders$ | async"
+                               [options]="genderFilters"
+                               (optionsFilter)="setFiltersGender($event)"
+                               (optionsNameFilter)="setFilterName($event, 'gender')">
+        </app-ms-filter-sidebar>
+      </div>
+      <div class="border-filter-box px-3">
+        <div
+          class="custom-control custom-checkbox collection-filter-checkbox collection-filter-block px-5 py-2">
+          <input class="form-check-input" type="checkbox" id="onlyOnSale1"
+                 [checked]="selectedOnlyOnSale$ | async"
+                 (change)="setFilterOnlyOnSale($event)"
+          >
+          <label class="form-check-label" for="onlyOnSale1">
+            On Sale
+          </label>
+        </div>
+      </div>
+      <div class="border-filter-box" *ngIf="categories">
+        <app-ms-filter-sidebar
+          (optionsFilter)="setFiltersCategory($event)"
+          (optionsNameFilter)="setFilterName($event, 'category')"
+          [filterTitle]="'Categories'"
+          [isRadio]="true"
+          [multiple]="true"
+          [options]="categories"
+          [selectedOptions]="selectedCategories$ | async">
+        </app-ms-filter-sidebar>
+      </div>
+      <div class="border-filter-box" *ngIf="brands && ignoreFilters.indexOf('brands') == -1">
+        <app-ms-filter-sidebar
+          (optionsFilter)="setFiltersBrands($event)"
+          (optionsNameFilter)="setFilterName($event, 'brand')"
+          [filterTitle]="'Brands'"
+          [isRadio]="true"
+          [multiple]="true"
+          [options]="brands"
+          [selectedOptions]="selectedBrands$ | async">
+        </app-ms-filter-sidebar>
+      </div>
+      <div class="border-filter-box">
+        <app-ms-filter-sidebar
+          (optionsFilter)="setFiltersColors($event)"
+          (optionsNameFilter)="setFilterName($event, 'color')"
+          [isRadio]="true"
+          [multiple]="true"
+          [options]="coloredOptions"
+          [selectedOptions]="selectedColors$ | async"
+          [filterTitle]="'Colors'">
+        </app-ms-filter-sidebar>
+      </div>
+      <div class="border-filter-box">
+        <app-ms-filter-sidebar
+          (optionsFilter)="setFiltersPrice($event)"
+          [filterTitle]="'Price'"
+          [isRange]="true">
+        </app-ms-filter-sidebar>
+      </div>
+    </div>
+    <div class="flex-grow-1">
+      <!-- Filters to small devices -->
+      <div class="display-only-in-small-devices">
+        <div [class.open]="collapseFilters" class="collection-collapse-block">
+          <button
+            (click)="collapseFilters = !collapseFilters"
+            class="custom-filter-buttom mb-3">
+            <i aria-hidden="true" class="fa fa-filter mr-1"></i>
+            Filters
+          </button>
+          <div class="collection-collapse-block-content">
+            <div class="d-flex flex-column justify-content-center align-items-center mt-2">
+              <div class="border-filter-box" *ngIf="genderFilters">
+                <app-ms-filter-sidebar [isRadio]="true"
+                                       [defaultValue]="'All'"
+                                       [filterTitle]="'Genders'"
+                                       [selectedOptions]="selectedGenders$ | async"
+                                       [options]="genderFilters"
+                                       (optionsFilter)="setFiltersGender($event)"
+                                       (optionsNameFilter)="setFilterName($event, 'gender')">
+                </app-ms-filter-sidebar>
+              </div>
+              <div class="border-filter-box px-3">
+                <div
+                  class="custom-control custom-checkbox collection-filter-checkbox collection-filter-block px-5 py-2">
+                  <input class="form-check-input" type="checkbox" id="onlyOnSale2"
+                         [checked]="selectedOnlyOnSale$ | async"
+                         (change)="setFilterOnlyOnSale($event)"
+                  >
+                  <label class="form-check-label" for="onlyOnSale2">
+                    On Sale
+                  </label>
+                </div>
+              </div>
+              <div class="border-filter-box">
+                <app-ms-filter-sidebar
+                  (optionsFilter)="setFiltersCategory($event)"
+                  (optionsNameFilter)="setFilterName($event, 'category')"
+                  *ngIf="categories"
+                  [filterTitle]="'Categories'"
+                  [options]="categories"
+                  [isRadio]="true"
+                  [multiple]="true"
+                  [selectedOptions]="selectedCategories$ | async"
+                  class="border-filter-box">
+                </app-ms-filter-sidebar>
+              </div>
+              <div class="border-filter-box">
+                <app-ms-filter-sidebar
+                  (optionsFilter)="setFiltersBrands($event)"
+                  (optionsNameFilter)="setFilterName($event, 'brand')"
+                  *ngIf="brands && ignoreFilters.indexOf('brands') == -1"
+                  [filterTitle]="'Brands'"
+                  [isRadio]="true"
+                  [multiple]="true"
+                  [options]="brands"
+                  [selectedOptions]="selectedBrands$ | async">
+                </app-ms-filter-sidebar>
+              </div>
+              <div class="border-filter-box">
+                <app-ms-filter-sidebar
+                  (optionsFilter)="setFiltersColors($event)"
+                  (optionsNameFilter)="setFilterName($event, 'color')"
+                  [isRadio]="true"
+                  [multiple]="true"
+                  [options]="coloredOptions"
+                  [selectedOptions]="selectedColors$ | async"
+                  [filterTitle]="'Colors'">
+                </app-ms-filter-sidebar>
+              </div>
+              <div class="border-filter-box">
+                <app-ms-filter-sidebar
+                  (optionsFilter)="setFiltersPrice($event)"
+                  [filterTitle]="'Price'"
+                  [isRange]="true">
+                </app-ms-filter-sidebar>
+              </div>
+            </div>
+          </div>
+          <!-- END Filters -->
+        </div>
+      </div>
+      <app-style-filters-header
+        (sorted)="changeSort($event)"
+        [count]="count"
+        [defaultSelectedOption]="2"
+        [length]="releases?.length">
+      </app-style-filters-header>
+      <div class="d-flex flex-wrap justify-content-start mt-4 mb-4">
+        <app-responsive-product-card
+          *ngFor="let item of releases"
+          [release]="item"
+          class="my-2"></app-responsive-product-card>
+        <ng-container *ngFor="let item of [1, 2, 3, 4, 5, 6, 7, 8]">
+          <app-skeleton-product-box
+            *ngIf="loading"
+            class="my-2 release-item"></app-skeleton-product-box>
+        </ng-container>
+      </div>
+      <app-pagination
+        [current]="currentPage"
+        [totalPages]="totalPages">
+      </app-pagination>
+    </div>
+  </div>
+</div>

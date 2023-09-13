@@ -1,0 +1,61 @@
+<app-breadcrumb
+  [breadcrumb]="'Portfolio'"
+  [title]="'Portfolio'"></app-breadcrumb>
+<!-- section start -->
+<section class="filter-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="title1">
+          <h2 class="title-inner1">portfolio</h2>
+        </div>
+        <div class="filter-container isotopeFilters">
+          <ul class="list-inline filter">
+            <li [class.active]="galleryFilter == 'all'">
+              <a (click)="filter('all')" href="javascript:void(0)">All </a>
+            </li>
+            <li [class.active]="galleryFilter == 'fashion'">
+              <a (click)="filter('fashion')" href="javascript:void(0)"
+                >Fashion</a
+              >
+            </li>
+            <li [class.active]="galleryFilter == 'shoes'">
+              <a (click)="filter('shoes')" href="javascript:void(0)">Shoes</a>
+            </li>
+            <li [class.active]="galleryFilter == 'watch'">
+              <a (click)="filter('watch')" href="javascript:void(0)">Watch</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="portfolio-section pt-0 port-col zoom-gallery">
+  <div class="container">
+    <div class="row isotopeContainer">
+      <div
+        *ngFor="let image of Images"
+        [ngClass]="galleryFilter"
+        class="col-sm-6 isotopeSelector">
+        <div class="overlay">
+          <div class="border-portfolio">
+            <a href="javascript:void(0)">
+              <div (click)="openImage(image)" class="overlay-background">
+                <i aria-hidden="true" class="fa fa-plus"></i>
+              </div>
+              <img [src]="image.modal.img" class="img-fluid" />
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <ks-modal-gallery
+    [buttonsConfig]="ButtonsConfig"
+    [id]="200"
+    [modalImages]="Images"
+    [plainGalleryConfig]="GalleryConfig">
+  </ks-modal-gallery>
+</section>
+<!-- Section ends -->

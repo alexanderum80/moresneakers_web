@@ -1,0 +1,117 @@
+<div class="d-flex flex-column">
+  <!-- <div class="modal-iframe" *ngIf="showIframe">
+      <button class="close-btn" (click)="closeIframe()">X</button>
+      <iframe width="540" height="305" src="https://52d94310.sibforms.com/serve/MUIEAMOjk-ttt75zM1fadCO-e9icHgpDNRN4o_IxEHiAQaIoTEQmidf6WXB5HnWfkAosEOx_ci6zQFSDU8MHuujDP18UXlH73K-C95DtTlZNcf-fUBeRP0YzEiaPlZn9YfWycKm5zhTkHHBxTaduULOgGb3EBgx0ITzRHI-U5DqcXSApgZKeXljZY3bKse7EGNqiFl5j5Q-LAO9N" frameborder="0" scrolling="auto" allowfullscreen style="display: block;margin-left: auto;margin-right: auto;max-width: 100%;"></iframe>
+
+    </div> -->
+  <app-navbar></app-navbar>
+  <app-header-search
+    *ngIf="(layoutHeading$ | async)?.displayOnPage"
+    [imageUrl]="(layoutHeading$ | async).imgUrl"
+    [title]="(layoutHeading$ | async).title"></app-header-search>
+
+  <!-- Display if home page has configuration to display header in top -->
+  <app-header
+    *ngIf="
+      (layoutHeader$ | async)?.displayOnPage &&
+      (layoutHeader$ | async)?.display == 'top'
+    "
+    [imageMovilSrc]="
+      (layoutHeader$ | async)?.imgMovil
+        ? (layoutHeader$ | async)?.imgMovil
+        : 'assets/images/headers/whats-new.png'
+    "
+    [imageSrc]="
+      (layoutHeader$ | async)?.imgUrl
+        ? (layoutHeader$ | async)?.imgUrl
+        : 'assets/images/headers/whats-new.png'
+    "
+    [label]="(layoutHeader$ | async)?.label"
+    [link]="(layoutHeader$ | async)?.link"></app-header>
+
+  <!-- Display if home page has configuration to display slider in top -->
+  <app-carousel
+    *ngIf="(layoutSlider$ | async)?.display == 'top'"
+    [slides]="(layoutSlider$ | async)?.slides"></app-carousel>
+
+  <div class="container">
+    <div *ngIf="(layoutDeals$ | async)?.displayOnPage" class="row">
+      <div
+        *ngFor="let item of (layoutDeals$ | async)?.deals"
+        class="col-lg-6 col-md-6 col-sm-12 my-3">
+        <app-discount-offer-item [item]="item"></app-discount-offer-item>
+      </div>
+    </div>
+  </div>
+
+  <div class="releases-list mb-80">
+    <offers-pinned [offersPinned]="offersPinned$ | async"></offers-pinned>
+  </div>
+
+  <!-- Display if home page has configuration to display hottest releases in top -->
+  <app-hottest-releases
+    *ngIf="(layoutHottestReleases$ | async)?.display == 'top'"
+    [releases]="hottestReleases$ | async"></app-hottest-releases>
+
+  <app-what-we-do-section
+    [sneakers]="sneakers$ | async"></app-what-we-do-section>
+
+  <div class="mb-3">
+    <app-partnership></app-partnership>
+  </div>
+
+  <div class="releases-list mb-80">
+    <app-products-list-vertical-slider
+      [offers]="whatsNewOffers$ | async"
+      [showShop]="true"
+      [subtitle]="
+        'New drops, restocks, new to sale sneakers offers in the game'
+      "
+      [title]="'What`s new'"></app-products-list-vertical-slider>
+  </div>
+  <div class="releases-list mb-80">
+    <app-products-list-vertical-slider
+      [releases]="latestReleases$ | async"
+      [seeAllLink]="'/releases/in-stock'"
+      [subtitle]="'All the latest update about sneakers releases'"
+      [title]="'Latest Releases'"></app-products-list-vertical-slider>
+  </div>
+  <div class="releases-list">
+    <app-products-list-vertical-slider
+      [releases]="upcomingReleases$ | async"
+      [seeAllLink]="'/releases/coming-soon'"
+      [showDate]="true"
+      [subtitle]="'A glimse of the future sneakers coming to the game soon'"
+      [title]="'Upcoming releases'"
+      [urlData]="{ data: 2 }"></app-products-list-vertical-slider>
+  </div>
+
+  <!-- blog section start-->
+  <app-blog-section [blog]="blogs$ | async" class="mb-80"></app-blog-section>
+
+  <!-- Display if home page has configuration to display hottest releases in bottom -->
+  <app-hottest-releases
+    *ngIf="(layoutHottestReleases$ | async)?.display == 'bottom'"
+    [releases]="hottestReleases$ | async"></app-hottest-releases>
+
+  <!-- Display if home page has configuration to display slider in bottom -->
+  <app-carousel
+    *ngIf="(layoutSlider$ | async)?.display == 'bottom'"
+    [slides]="(layoutSlider$ | async)?.slides"></app-carousel>
+
+  <!-- Display if home page has configuration to display header in bottom -->
+  <app-header
+    *ngIf="
+      (layoutHeader$ | async)?.displayOnPage &&
+      (layoutHeader$ | async)?.display == 'bottom'
+    "
+    [imageSrc]="
+      (layoutHeader$ | async)?.imgUrl
+        ? (layoutHeader$ | async)?.imgUrl
+        : 'assets/images/headers/whats-new.png'
+    "
+    [label]="(layoutHeader$ | async)?.label"
+    [link]="(layoutHeader$ | async)?.link"></app-header>
+
+  <app-footer></app-footer>
+</div>

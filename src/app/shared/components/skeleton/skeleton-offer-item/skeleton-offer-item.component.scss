@@ -1,0 +1,19 @@
+.offer-item-container {
+  height: 100px;
+  background: #ffffff;
+  border: 1px solid #e5e5e5;
+  box-sizing: border-box;
+  border-radius: 8px;
+  text-align: center;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+@media (max-width: 440px) {
+  .no-display-in-small {
+    display: none;
+  }
+}

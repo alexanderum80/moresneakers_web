@@ -1,0 +1,95 @@
+<div
+  [class.openSide]="productService?.OpenCart"
+  [ngClass]="direction"
+  class="add_to_cart"
+  id="cart_side">
+  <a (click)="closeCart()" class="overlay" href="javascript:void(0)"></a>
+  <div class="cart-inner">
+    <div class="cart_top">
+      <h3>my cart</h3>
+      <div (click)="closeCart()" class="close-cart">
+        <a href="javascript:void(0)">
+          <i aria-hidden="true" class="fa fa-times"></i>
+        </a>
+      </div>
+    </div>
+    <div *ngIf="products.length" class="cart_media">
+      <ul class="cart_product">
+        <li *ngFor="let product of products">
+          <div class="media">
+            <a
+              [routerLink]="[
+                '/shop/product/left/sidebar/',
+                product.title.replace(' ', '-')
+              ]">
+              <img
+                [alt]="product.images[0].alt"
+                [src]="product.images[0].src"
+                class="mr-3" />
+            </a>
+            <div class="media-body">
+              <a
+                [routerLink]="[
+                  '/shop/product/left/sidebar/',
+                  product.title.replace(' ', '-')
+                ]">
+                <h4>{{ product?.title | titlecase }}</h4>
+              </a>
+              <h4>
+                <span>
+                  {{ product?.quantity }} x
+                  {{
+                    product?.price * productService?.Currency.price
+                      | discount : product
+                      | currency : productService?.Currency.currency : 'symbol'
+                  }}
+                </span>
+              </h4>
+            </div>
+          </div>
+          <div class="close-circle">
+            <a (click)="removeItem(product)" href="javascript:void(0)">
+              <i aria-hidden="true" class="ti-trash"></i>
+            </a>
+          </div>
+        </li>
+      </ul>
+      <ul class="cart_total">
+        <li>
+          <div class="total">
+            <h5>
+              subtotal :
+              <span>{{
+                getTotal
+                  | async
+                  | currency : productService?.Currency.currency : 'symbol'
+              }}</span>
+            </h5>
+          </div>
+        </li>
+        <li>
+          <div class="buttons">
+            <a
+              [routerLink]="['/shop/cart']"
+              class="btn btn-solid btn-xs view-cart"
+              >view cart</a
+            >
+            <a
+              [routerLink]="['/shop/checkout']"
+              class="btn btn-solid btn-xs checkout"
+              >checkout</a
+            >
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div *ngIf="!products.length" class="col-sm-12 empty-cart-cls text-left">
+      <h4 class="mt-3">
+        <strong>Your Cart is Empty</strong>
+      </h4>
+      <a [routerLink]="['/shop/collection/left/sidebar']" class="btn btn-solid"
+        >continue shopping</a
+      >
+    </div>
+  </div>
+</div>

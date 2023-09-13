@@ -1,0 +1,105 @@
+stages:
+  - build
+  - deploy
+  - notify
+
+variables:
+  AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
+  AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
+  AWS_REGION: $AWS_DEFAULT_REGION
+  AWS_EB_PROD: $AWS_EB_APP
+
+build-prod:
+  stage: build
+  image: node:10.23.0
+  script:
+      - yarn
+      - yarn run build-prod:ssr
+      - echo "BUILD SUCCESSFULLY"
+  artifacts:
+      paths:
+          - dist/
+      expire_in: 1 day
+  only:
+    - master
+
+deploy-prod:
+  stage: deploy
+  image: python:3.7-stretch
+  dependencies:
+    - build-prod
+  script:
+    - mkdir ssr
+    - cd ssr && mkdir dist
+    - cd ..
+    - cp -r dist/* ssr/dist
+    - cd ssr
+    - export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
+    - export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
+    - export AWS_DEFAULT_REGION=$AWS_DEFAULT_REGION
+    - export AWS_EB_APP=$AWS_EB_APP
+    - pip install awsebcli --upgrade --user
+    - export PATH=~/.local/bin:$PATH
+    - eb init $AWS_EB_APP -r $AWS_DEFAULT_REGION -p node.js
+    - eb use ${AWS_EB_APP}-ssr-prod
+    - eb deploy ${AWS_EB_APP}-ssr-prod
+    - echo "DEPLOYED SUCCESSFULLY"
+  only:
+    - master
+  when: manual
+
+build-preprod:
+  stage: build
+  image: node:10.23.0
+  script:
+      - yarn
+      - yarn run build-staging:ssr
+      - echo "BUILD SUCCESSFULLY"
+  artifacts:
+      paths:
+          - dist/
+      expire_in: 1 day
+  only:
+    - develop
+
+deploy-preprod:
+  stage: deploy
+  image: python:3.7-stretch
+  dependencies:
+    - build-preprod
+  script:
+    - mkdir ssr
+    - cd ssr && mkdir dist
+    - cd ..
+    - cp -r dist/* ssr/dist
+    - cd ssr
+    - export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
+    - export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
+    - export AWS_DEFAULT_REGION=$AWS_DEFAULT_REGION
+    - export AWS_EB_APP=$AWS_EB_APP
+    - pip install awsebcli --upgrade --user
+    - export PATH=~/.local/bin:$PATH
+    - eb init $AWS_EB_APP -r $AWS_DEFAULT_REGION -p node.js
+    - eb use ${AWS_EB_APP}-prod
+    - eb deploy ${AWS_EB_APP}-prod
+    - echo "DEPLOYED SUCCESSFULLY"
+  only:
+    - develop
+  when: manual
+
+success:
+  variables:
+    PIPELINE_STATE: "was successful"
+  stage: notify
+  image: 
+    name: ruby:2.5
+  script:
+    - echo "curl -i -X GET \"https://api.telegram.org/bot5117838057:AAGzwX7mEDQctxrdUY3p3KP4p-7UgwrmTRE/sendMessage?chat_id=-1001769158278&text=The '"$CI_PROJECT_URL"/-/tree/"$CI_COMMIT_BRANCH"' job execution "$PIPELINE_STATE" on commit "$CI_COMMIT_SHORT_SHA" with following description "$CI_COMMIT_DESCRIPTION" by user $CI_COMMIT_AUTHOR, for details go to '"$CI_PROJECT_URL"/-/pipelines/"$CI_PIPELINE_ID"' \"" | sh
+
+failure:
+  image: 
+    name: ruby:2.5
+  stage: notify
+  when: on_failure
+  script:
+    - echo "curl -i -X GET \"https://api.telegram.org/bot5117838057:AAGzwX7mEDQctxrdUY3p3KP4p-7UgwrmTRE/sendMessage?chat_id=-1001769158278&text=🚨🚨🚨The '"$CI_PROJECT_URL"/-/tree/"$CI_COMMIT_BRANCH"' job execution has failed on commit "$CI_COMMIT_SHORT_SHA" by user $CI_COMMIT_AUTHOR, for details go to '"$CI_PROJECT_URL"/-/pipelines/"$CI_PIPELINE_ID"' \"" | sh

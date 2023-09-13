@@ -1,0 +1,21 @@
+<div *ngFor="let dateGroup of dateGroupsMap$ | async | keyvalue : originalOrder">
+    <div
+            *ngIf="dateGroup.key"
+            class="w-100 font-weight-bold border-bottom p-2 group-content">
+        {{ prefix ? prefix + ' ' : ''
+        }}{{ getReleaseDate(dateGroup.value.field, dateGroup.value.timeZone) }}
+        <app-count-down
+                [countDownLabel]="countDownLabel"
+                [timeZone]="dateGroup.value.timeZone"
+                [value]="dateGroup.value.field">
+        </app-count-down>
+    </div>
+    <app-offer-item
+            *ngFor="let offer of dateGroup.value.data"
+            [isJustDropped]="isJustDropped"
+            [margin]="false"
+            [offer]="offer"
+            [showReleaseTime]="showReleaseTime"
+            class="w-100">
+    </app-offer-item>
+</div>

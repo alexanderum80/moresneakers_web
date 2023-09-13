@@ -1,0 +1,23 @@
+.title1 {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 64px;
+  text-align: center;
+  color: #daab28;
+
+  & .title-inner1 {
+    font-style: normal;
+    font-weight: 200;
+    font-size: 32px;
+    line-height: 64px;
+    text-align: center;
+    text-transform: none;
+    color: #000000;
+
+    &::after {
+      width: 100px;
+      height: 4px !important;
+    }
+  }
+}

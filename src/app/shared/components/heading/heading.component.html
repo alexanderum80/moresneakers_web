@@ -1,0 +1,22 @@
+<div [style.background-image]="imgUrl ? 'url(' + imgUrl + ')' : ''"
+     [style.background-size]="'cover'"
+     [style.height]="imgUrl ? '300px' : 'auto'"
+     [style.width]="imgUrl ? '100%' : 'auto'">
+  <div class="container h-100">
+    <div
+      class="d-flex flex-md-row flex-column justify-content-center justify-content-md-start align-items-center h-100">
+      <div *ngIf="title"
+           class="d-flex flex-column justify-content-center align-items-center">
+        <h1 [innerHTML]="title" class="header-title"></h1>
+        <div class="header-line"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="d-flex align-items-center" *ngIf="description">
+  <div class="container py-3">
+    <h6 *ngIf="description" class="header-description">
+      <div [innerHTML]="description"></div>
+    </h6>
+  </div>
+</div>

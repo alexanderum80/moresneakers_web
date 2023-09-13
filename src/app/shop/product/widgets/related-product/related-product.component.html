@@ -1,0 +1,24 @@
+<!-- product section start -->
+<section class="section-b-space">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 product-related">
+        <h2>Related Products</h2>
+      </div>
+    </div>
+    <div class="row search-product">
+      <div
+        *ngFor="let product of products | slice : 0 : 6"
+        class="col-xl-2 col-md-4 col-sm-6">
+        <div class="product-box">
+          <app-product-box-one
+            [cartModal]="true"
+            [currency]="productService?.Currency"
+            [product]="product">
+          </app-product-box-one>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- product section end -->

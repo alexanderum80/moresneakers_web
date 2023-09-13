@@ -1,0 +1,114 @@
+<section *ngIf="canShowOffersPinned()">
+    <h2 class="section-title ml-3 p-3">{{ offersPinnedTitle }}</h2>
+    <div class="row section">
+        <div class="d-flex justify-content-center"></div>
+        <div
+                *ngFor="let offer of offersPinned"
+                class="col-xl-6 col-lg-6 col-md-6 col-12">
+            <div
+                    class="offer-item-container d-flex flex-row justify-content-around align-items-center mb-2">
+                <div class="offer-item-image m-1">
+                    <img
+                            [alt]="offer.release.name + ' ' + offer.release.sku"
+                            [src]="offer.release.mainImage"
+                            [title]="offer.release.name + ' ' + offer.release.sku"
+                            alt="main-image"
+                            class="main-image"/>
+                    <div
+                            *ngIf="offer.release.style.BrandModel"
+                            class="brand-logo-wrapper m-1">
+                        <img
+                                [alt]="offer.release.style.BrandModel.name"
+                                [src]="urlToHttps(offer.release.style.BrandModel.imgUrl)"
+                                [title]="offer.release.style.BrandModel.name"
+                                class="brand-image"/>
+                    </div>
+                </div>
+                <div class="offer-item-release-name m-1">
+                    <p [style.color]="getStatusStyle(offer.status)" class="offer-status">
+                        {{ getStatus(offer.status) }}
+                    </p>
+
+                    <p class="brand-name my-1">on {{ offer.shop.name }}</p>
+
+                    <p class="offer-name d-none d-sm-block">
+                        <a [routerLink]="['/releases/', offer.release.slug]">
+                            {{ offer.release.name }}
+                        </a>
+                    </p>
+                    <!-- <p class="offer-sku">{{ offer.release.sku }}</p> -->
+                </div>
+
+                <div
+                        class="d-flex flex-lg-row offer-item-group-elements flex-column justify-content-between align-items-center">
+                    <!-- <div class="mx-2 my-1 width-30">
+                                <p *ngIf="offer.discountCode" class="offer-region text-center offer-promotion-code ">
+                                  Use code: {{ offer.discountCode }}
+                                </p>
+
+                                <p class="offer-region">{{ getShippingRegions(offer.release) }}</p>
+                              </div> -->
+                    <div
+                            class="flex flex-column justify-content-center align-intems-center">
+                        <div class="d-inline-block" ngbDropdown>
+                            <button class="link-button">
+                                <a
+                                        [routerLink]="['/releases/', offer.release.slug]"
+                                        rel="nofollow">
+                                    Shop now
+                                </a>
+                            </button>
+                        </div>
+
+                        <div class="mt-1">
+                            <p *ngIf="!offer.salePercentage" class="offer-price">
+                                {{ offer.price | currency : offer.currency }}
+                            </p>
+                            <ng-container *ngIf="offer.salePercentage">
+                                <p class="offer-price">
+                                    {{
+                                    getOldPrice(offer).toString() | currency : offer.currency
+                                    }}
+                                </p>
+                                <p class="offer-old-price">
+                                    {{ offer.price | currency : offer.currency }}
+                                </p>
+                            </ng-container>
+                        </div>
+                    </div>
+                    <!-- <div
+                                class="mx-2 my-1 width-40"
+                                *ngIf="offer.links.length > 1; else onlyOneLink"
+                              >
+                                <div ngbDropdown class="d-inline-block">
+                                  <button class="link-button" id="links-dropdown" ngbDropdownToggle>
+                                    Get it <i class="fa fa-angle-down fa-lg ml-2"></i>
+                                  </button>
+                                  <div ngbDropdownMenu aria-labelledby="links-dropdown">
+                                    <a
+                                      rel="nofollow"
+                                      target="_blank"
+                                      [href]="link.bitlyUrl ? link.bitlyUrl : link.trackedUrl"
+                                      *ngFor="let link of offer.links"
+                                      ngbDropdownItem
+                                    >
+                                      {{ link.text }}
+                                    </a>
+                                  </div>
+                                </div>
+                              </div>
+                              <ng-template  #onlyOneLink>
+                                  <div *ngIf="offer.links.length > 0">
+                                      <button class="link-button mx-2 my-1 p-0">
+                                        <a class="link" rel="nofollow" target="_blank" [href]="offer.links[0].bitlyUrl ? offer.links[0].bitlyUrl : offer.links[0].trackedUrl">{{
+                                          offer.links[0].text
+                                        }}</a>
+                                      </button>
+
+                                  </div>
+                              </ng-template> -->
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,133 @@
+.collection-filter-block {
+  width: 233px;
+}
+
+.category-list > li > a,
+.custom-control-label {
+  font-style: normal !important;
+  font-weight: 300 !important;
+  font-size: 14px !important;
+  line-height: 14px !important;
+  color: #000000 !important;
+  text-transform: none !important;
+}
+
+.collapse-block-title {
+  font-style: normal !important;
+  font-weight: 600 !important;
+  font-size: 14px !important;
+  line-height: 14px !important;
+  color: #000000 !important;
+  text-transform: none !important;
+
+  &::after {
+    content: '\f107';
+  }
+}
+
+.color-box {
+  width: 14px;
+  height: 14px;
+  border-radius: 100%;
+  background: #ffffff;
+  border: 1px solid #e5e5e5;
+  box-sizing: border-box;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #e5e5e5;
+  border-radius: 8px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #daab28;
+  border-radius: 8px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #b28b1e;
+}
+
+.collection-brand-filter {
+  scrollbar-color: #daab28 #e5e5e5;
+  scrollbar-width: thin;
+}
+
+.single-item {
+  cursor: pointer;
+}
+
+.collection-collapse-block {
+  position: relative !important;
+}
+
+.remove-filter-container {
+  position: absolute;
+  right: -4px;
+  top: 2px;
+  z-index: 1;
+}
+
+.remove-filter-container:hover {
+  cursor: pointer;
+}
+
+.open-selector {
+  height: 200px;
+}
+
+.close-selector {
+  height: auto;
+}
+
+.ng-select.custom {
+  border: 1px solid #e5e5e5;
+  min-height: 0;
+  border-radius: 4px;
+  padding: 4px;
+  background-color: #ffffff;
+}
+
+::ng-deep
+.ng-dropdown-panel
+::ng-deep
+.ng-dropdown-panel-items
+::ng-deep
+.ng-option {
+  min-height: 0;
+  border-radius: 0;
+  background-color: #f5f4f4;
+  padding: 4px;
+}
+
+::ng-deep
+.ng-dropdown-panel
+::ng-deep
+.ng-dropdown-panel-items
+::ng-deep
+.ng-option:hover {
+  min-height: 0;
+  border-radius: 0;
+  background-color: #b28b1e;
+  padding: 4px;
+  color: #fff;
+}
+
+::ng-deep .ng-value-label {
+  background-color: #b28b1e;
+  color: #fff;
+  padding-left: 2px;
+  padding-right: 2px;
+}
+
+.form-check-label {
+  text-transform: none !important;
+}

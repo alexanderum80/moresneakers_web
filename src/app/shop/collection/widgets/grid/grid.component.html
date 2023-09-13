@@ -1,0 +1,65 @@
+<div class="product-top-filter">
+  <div class="row">
+    <div class="col-12">
+      <div class="product-filter-content">
+        <div class="search-count">
+          <h5>
+            Showing Products 1-{{ products.length }} of
+            {{ paginate.totalItems }} Result
+          </h5>
+        </div>
+        <div class="collection-view">
+          <ul>
+            <li (click)="setLayoutView('grid-view')">
+              <i class="fa fa-th grid-layout-view"></i>
+            </li>
+            <li (click)="setLayoutView('list-view')">
+              <i class="fa fa-list-ul list-layout-view"></i>
+            </li>
+          </ul>
+        </div>
+        <div *ngIf="layoutView == 'grid-view'" class="collection-grid-view">
+          <ul>
+            <li (click)="setGridLayout('col-lg-6')">
+              <img
+                class="product-2-layout-view"
+                src="assets/images/icon/2.png" />
+            </li>
+            <li (click)="setGridLayout('col-lg-4')">
+              <img
+                class="product-3-layout-view"
+                src="assets/images/icon/3.png" />
+            </li>
+            <li (click)="setGridLayout('col-lg-3')">
+              <img
+                class="product-4-layout-view"
+                src="assets/images/icon/4.png" />
+            </li>
+            <li (click)="setGridLayout('col-lg-2')">
+              <img
+                class="product-6-layout-view"
+                src="assets/images/icon/6.png" />
+            </li>
+          </ul>
+        </div>
+        <div class="product-page-filter">
+          <select (change)="sorting($event)">
+            <option value="">Sorting Items</option>
+            <option [selected]="sortBy == 'a-z'" value="a-z">
+              Alphabetically A-Z
+            </option>
+            <option [selected]="sortBy == 'z-a'" value="z-a">
+              Alphabetically Z-A
+            </option>
+            <option [selected]="sortBy == 'low'" value="low">
+              Price Low to High
+            </option>
+            <option [selected]="sortBy == 'high'" value="high">
+              Price High to Low
+            </option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,37 @@
+<div class="d-flex justify-content-around">
+    <div class="m-1">
+        <div class="main-image-container">
+            <img
+                    [src]="'assets/images/test/sneakers.png'"
+                    alt="main-image"
+                    class="main-image"/>
+            <img
+                    [src]="'assets/images/test/adidas.png'"
+                    alt="main-image"
+                    class="brand-image"/>
+        </div>
+    </div>
+    <div class="m-1">
+        <p class="offer-text">{{ offer.name }}</p>
+        <div class="d-flex align-items-center mt-2">
+            <p class="offer-text">{{ offer.style }}</p>
+            <div class="circle mx-2"></div>
+            <p [style.color]="getStatusStyle(offer.status)">{{ offer.status }}</p>
+        </div>
+        <p class="price mt-2">{{ offer.price }}</p>
+        <p class="show-on-region mt-2">{{ offer.showOnRegion }}</p>
+        <div class="d-inline-block mt-2" ngbDropdown>
+            <button class="link-button" id="links-dropdown" ngbDropdownToggle>
+                Get it <i aria-hidden="true" class="fa fa-angle-down fa-lg ml-2"></i>
+            </button>
+            <div aria-labelledby="links-dropdown" ngbDropdownMenu>
+                <button *ngFor="let link of offer.links" ngbDropdownItem>
+                    {{ link.text }}
+                </button>
+            </div>
+        </div>
+        <ng-template #onlyOneLink>
+            <button class="link-button">{{ offer.links[0].text }}</button>
+        </ng-template>
+    </div>
+</div>

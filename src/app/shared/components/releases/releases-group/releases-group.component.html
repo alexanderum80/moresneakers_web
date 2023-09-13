@@ -1,0 +1,133 @@
+<div class="container h-100">
+  <div class="d-flex flex-row justify-content-center mb-3">
+    <h3 (click)="changeSelectedGroup(i + 1)"
+        *ngFor="let group of groups; index as i"
+        [ngClass]="i + 1 == getStatusNumber(statusGroup$ | async) ? 'group-item-selected' : 'group-item'"
+        class="mx-3 mx-lg-5">
+      {{ group }}
+    </h3>
+  </div>
+  <div class="d-flex flex-lg-nowrap flex-md-wrap">
+    <div class="d-flex flex-column mr-4 display-only-hight-resolutions">
+      <div class="border-filter-box">
+        <app-ms-filter-sidebar
+          (optionsFilter)="setFiltersCategory($event)"
+          *ngIf="categories"
+          [filterTitle]="'Categories'"
+          [multiple]="true"
+          [options]="categories"
+          [selectedOptions]="selectedCategories$ | async">
+        </app-ms-filter-sidebar>
+      </div>
+      <div class="border-filter-box">
+        <app-ms-filter-sidebar
+          (optionsFilter)="setFiltersBrands($event)"
+          *ngIf="brands && ignoreFilters.indexOf('brands') == -1"
+          [filterTitle]="'Brands'"
+          [multiple]="true"
+          [options]="brands"
+          [selectedOptions]="selectedBrands$ | async">
+        </app-ms-filter-sidebar>
+      </div>
+      <div class="border-filter-box">
+        <app-ms-filter-sidebar
+          (optionsFilter)="setFiltersColors($event)"
+          [multiple]="true"
+          [options]="coloredOptions"
+          [selectedOptions]="selectedColors$ | async"
+          filterTitle="Colors">
+        </app-ms-filter-sidebar>
+      </div>
+
+      <!-- Hidde Filter because is not implemented in API yet -->
+      <!-- <app-ms-filter-sidebar
+                filterTitle="Sizes"
+                [options]="sizeOptions"
+                (optionsFilter)="setFiltersSize($event)"
+              ></app-ms-filter-sidebar> -->
+      <div class="border-filter-box">
+        <app-ms-filter-sidebar
+          (optionsFilter)="setFiltersPrice($event)"
+          [filterTitle]="'Prices'"
+          [isRange]="true">
+        </app-ms-filter-sidebar>
+      </div>
+    </div>
+    <div class="flex-grow-1">
+      <!-- Filters to small devices -->
+      <div class="display-only-in-small-devices">
+        <div [class.open]="collapseFilters" class="collection-collapse-block">
+          <button
+            (click)="collapseFilters = !collapseFilters"
+            class="custom-filter-buttom mb-3">
+            <i aria-hidden="true" class="fa fa-filter mr-1"></i>
+            Filters
+          </button>
+          <div class="collection-collapse-block-content">
+            <div class="d-flex flex-wrap justify-content-around mt-2">
+              <div class="border-filter-box">
+                <app-ms-filter-sidebar
+                  (optionsFilter)="setFiltersCategory($event)"
+                  *ngIf="categories"
+                  [filterTitle]="'Categories'"
+                  [options]="categories"
+                  [selectedOptions]="selectedCategories$ | async"
+                  class="border-filter-box">
+                </app-ms-filter-sidebar>
+              </div>
+              <div class="border-filter-box">
+                <app-ms-filter-sidebar
+                  (optionsFilter)="setFiltersBrands($event)"
+                  *ngIf="brands && ignoreFilters.indexOf('brands') == -1"
+                  [filterTitle]="'Brands'"
+                  [multiple]="true"
+                  [options]="brands"
+                  [selectedOptions]="selectedBrands$ | async">
+                </app-ms-filter-sidebar>
+              </div>
+              <div class="border-filter-box">
+                <app-ms-filter-sidebar
+                  (optionsFilter)="setFiltersColors($event)"
+                  [multiple]="true"
+                  [options]="coloredOptions"
+                  [selectedOptions]="selectedColors$ | async"
+                  filterTitle="Colors">
+                </app-ms-filter-sidebar>
+              </div>
+              <!-- Hidde Filter because is not implemented in API yet -->
+              <!-- <app-ms-filter-sidebar
+                                  filterTitle="Size"
+                                  [options]="sizeOptions"
+                                  (optionsFilter)="setFiltersSize($event)"
+                                ></app-ms-filter-sidebar> -->
+              <div class="border-filter-box">
+                <app-ms-filter-sidebar
+                  (optionsFilter)="setFiltersPrice($event)"
+                  [filterTitle]="'Price'"
+                  [isRange]="true">
+                </app-ms-filter-sidebar>
+              </div>
+            </div>
+          </div>
+          <!-- END Filters -->
+        </div>
+      </div>
+      <app-head-group
+        (onSort)="changeSort($event)"
+        [count]="releasesCount"
+        [defaultSelectedOption]="2"
+        [sortOptions]="sortOptions"
+        [total]="totalReleases">
+      </app-head-group>
+      <!-- d-flex flex-wrap justify-content-around -->
+      <div class="releases-container mt-4">
+        <app-product-card *ngFor="let release of releases"
+                          [release]="release">
+        </app-product-card>
+        <ng-container *ngIf="loading$ | async">
+          <app-skeleton-product-box *ngFor="let item of [1, 2, 3, 4, 5, 6, 7, 8]"></app-skeleton-product-box>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,25 @@
+.category-container {
+  width: 120px;
+  height: 120px;
+  background: #fafafa;
+  border-radius: 50%;
+}
+
+.category-name {
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 18px;
+  text-align: center;
+  color: #000000;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.category-img {
+  max-width: 68px;
+  height: auto;
+}

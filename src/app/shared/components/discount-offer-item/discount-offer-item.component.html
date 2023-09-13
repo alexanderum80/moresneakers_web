@@ -1,0 +1,12 @@
+<a [href]="item.link" rel="nofollow" target="_blank">
+  <div class="discount-container basic-effect">
+    <img
+      [alt]="getAltTitle()"
+      [src]="item.imgUrl"
+      [title]="getAltTitle()"
+      class="discount-image" />
+    <div class="discount-content">
+      <p class="discount-text">{{ item.label }}</p>
+    </div>
+  </div>
+</a>

@@ -1,0 +1,133 @@
+.image-hottest-releases {
+  //   background: #000000;
+  //   mix-blend-mode: multiply;
+  //   opacity: 0.75;
+  //   -webkit-filter: brightness(75%);
+
+  background-color: rgba(0, 0, 0, 0.75);
+}
+
+.hero-image {
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 480px;
+}
+
+.hero-image div {
+  background-color: rgba(0, 0, 0, 0.75);
+  height: 100%;
+}
+
+.trending {
+  font-size: 18px;
+  line-height: 18px;
+  text-align: center;
+  color: #daab28;
+}
+
+.hottest-releases-title {
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 48px;
+  line-height: 64px;
+  text-align: center;
+  text-transform: uppercase;
+  color: #ffffff;
+}
+
+.line-hottest-release {
+  width: 100px !important;
+  height: 4px !important;
+  background: #daab28 !important;
+}
+
+.release-name {
+  font-size: 24px;
+  line-height: 24px;
+  text-align: center;
+  color: #ffffff;
+  margin-left: 40px;
+  margin-right: 40px;
+}
+
+.custom-button {
+  padding: 14px 32px;
+  font-family: Montserrat;
+  font-style: normal;
+
+  font-size: 16px;
+  line-height: 20px;
+  color: #ffffff;
+
+  background: #0f0e0e;
+  border: 1px solid #ffffff;
+  box-sizing: border-box;
+  border-radius: 8px;
+}
+
+::ng-deep .carousel-control-prev {
+  background: #ffffff !important;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25) !important;
+  width: 80px !important;
+  height: 80px !important;
+  border-radius: 50% !important;
+  top: 43% !important;
+  margin-left: 5% !important;
+}
+
+::ng-deep .carousel-control-next {
+  background: #ffffff !important;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25) !important;
+  width: 80px !important;
+  height: 80px !important;
+  border-radius: 50% !important;
+  top: 43% !important;
+  margin-right: 5% !important;
+}
+
+::ng-deep .carousel-control-prev-icon {
+  background-image: url('/assets/images/icon/prev-2x.png') !important;
+  background-size: contain !important;
+}
+
+::ng-deep .carousel-control-next-icon {
+  background-image: url('/assets/images/icon/next-2x.png') !important;
+  background-size: contain !important;
+}
+
+@media (max-width: 767px) {
+  .hottest-releases-title {
+    font-size: 36px;
+    line-height: 48px;
+  }
+
+  ::ng-deep .carousel-control-prev {
+    background: #ffffff !important;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25) !important;
+    width: 32px !important;
+    height: 32px !important;
+    border-radius: 50% !important;
+    top: 43% !important;
+    margin-left: 5% !important;
+  }
+
+  ::ng-deep .carousel-control-next {
+    background: #ffffff !important;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25) !important;
+    width: 32px !important;
+    height: 32px !important;
+    border-radius: 50% !important;
+    top: 43% !important;
+    margin-right: 5% !important;
+  }
+
+  ::ng-deep .carousel-control-prev-icon {
+    background-image: url('/assets/images/icon/prev.png') !important;
+    background-size: contain !important;
+  }
+  ::ng-deep .carousel-control-next-icon {
+    background-image: url('/assets/images/icon/next.png') !important;
+    background-size: contain !important;
+  }
+}

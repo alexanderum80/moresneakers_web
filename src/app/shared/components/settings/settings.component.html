@@ -1,0 +1,46 @@
+<div class="icon-nav">
+  <ul>
+    <li class="onhover-div search-widgets" id="search-widgets">
+      <div (click)="searchToggle()">
+        <img alt="" class="img-fluid" src="assets/images/icon/search.png" />
+        <!-- <i class="ti-search"></i> -->
+      </div>
+      <div
+        [ngStyle]="{ display: search ? 'block' : 'none' }"
+        class="search-overlay"
+        id="search-overlay">
+        <div>
+          <span (click)="searchToggle()" class="closebtn" title="Close Overlay"
+            >×</span
+          >
+          <div class="overlay-content">
+            <div class="container">
+              <div class="row">
+                <div class="col-xl-12">
+                  <form autocomplete="off">
+                    <div class="form-group">
+                      <input
+                        #searchField
+                        (keydown.enter)="navigateToSearchReleases()"
+                        [(ngModel)]="searchTerm"
+                        [ngModelOptions]="{ standalone: true }"
+                        class="form-control"
+                        placeholder="Style, brand, sku, release, color,"
+                        type="text" />
+                    </div>
+                    <button
+                      (click)="navigateToSearchReleases()"
+                      class="btn btn-primary"
+                      type="submit">
+                      <i class="fa fa-search"></i>
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>

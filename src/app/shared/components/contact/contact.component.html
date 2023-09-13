@@ -1,0 +1,208 @@
+<app-navbar></app-navbar>
+<app-ms-breadcrumb [breadcrumb]="[{ name: 'Contact' }]"></app-ms-breadcrumb>
+<app-heading
+  *ngIf="layout && layout.heading && layout.heading.displayOnPage"
+  [description]="layout.heading.description"
+  [imgUrl]="
+    layout.heading.imgUrl
+      ? layout.heading.imgUrl
+      : 'assets/images/headers/header-categories.png'
+  "
+  [title]="layout.heading.title"></app-heading>
+<app-header
+  *ngIf="
+    layout &&
+    layout.header &&
+    layout.header.displayOnPage &&
+    layout.header.display == 'top'
+  "
+  [imageSrc]="
+    layout.header.imgUrl
+      ? layout.header.imgUrl
+      : 'assets/images/headers/header-brands.png'
+  "
+  [label]="layout.header.label"
+  [link]="layout.header.link"></app-header>
+
+<div *ngIf="layout?.deals?.displayOnPage" class="row">
+  <div
+    *ngFor="let item of layout?.deals?.deals"
+    class="col-lg-6 col-md-6 col-sm-12 my-3">
+    <app-discount-offer-item [item]="item"></app-discount-offer-item>
+  </div>
+</div>
+
+<div class="mt-4">
+  <!-- Display if home page has configuration to display slider in top -->
+  <app-carousel
+    *ngIf="
+      layout && layout.slider.displayOnPage && layout.slider.display == 'top'
+    "
+    [slides]="layout.slider.slides"></app-carousel>
+  <!-- Display if home page has configuration to display hottest releases in top -->
+  <app-hottest-releases
+    *ngIf="
+      layout &&
+      layout.hottest.displayOnPage &&
+      layout.hottest.display == 'top' &&
+      hottestReleases
+    "
+    [releases]="hottestReleases"></app-hottest-releases>
+</div>
+
+<section class="contact-page section-b-space">
+  <div class="container">
+    <!-- <div class="row section-b-space">
+          <div class="col-lg-7 map">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d50059.12775918716!2d72.78534673554945!3d21.16564923510817!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sin!4v1533793756956"
+              allowfullscreen
+            ></iframe>
+          </div>
+          <div class="col-lg-5">
+            <div class="contact-right">
+              <ul>
+                <li>
+                  <div class="contact-icon">
+                    <img
+                      src="assets/images/icon/phone.png"
+                      alt="Generic placeholder image"
+                    />
+                    <h6>Contact Us</h6>
+                  </div>
+                  <div class="media-body">
+                    <p>+91 123 - 456 - 7890</p>
+                    <p>+86 163 - 451 - 7894</p>
+                  </div>
+                </li>
+                <li>
+                  <div class="contact-icon">
+                    <i class="fa fa-map-marker" aria-hidden="true"></i>
+                    <h6>Address</h6>
+                  </div>
+                  <div class="media-body">
+                    <p>ABC Complex,Near xyz, New York</p>
+                    <p>USA 123456</p>
+                  </div>
+                </li>
+                <li>
+                  <div class="contact-icon">
+                    <img
+                      src="assets/images/icon/email.png"
+                      alt="Generic placeholder image"
+                    />
+                    <h6>Address</h6>
+                  </div>
+                  <div class="media-body">
+                    <p>Support@Shopcart.com</p>
+                    <p>info@shopcart.com</p>
+                  </div>
+                </li>
+                <li>
+                  <div class="contact-icon">
+                    <i class="fa fa-fax" aria-hidden="true"></i>
+                    <h6>Fax</h6>
+                  </div>
+                  <div class="media-body">
+                    <p>Support@Shopcart.com</p>
+                    <p>info@shopcart.com</p>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div> -->
+    <div class="row">
+      <div class="col-sm-12">
+        <form
+          (ngSubmit)="submitClicked()"
+          [formGroup]="formGroup"
+          class="theme-form">
+          <div class="form-row">
+            <div class="col-md-6">
+              <label for="name">First Name</label>
+              <input
+                class="form-control"
+                formControlName="name"
+                id="name"
+                placeholder="Enter Your name"
+                type="text" />
+            </div>
+            <div class="col-md-6">
+              <label for="email">Email</label>
+              <input
+                class="form-control"
+                formControlName="email"
+                id="email"
+                placeholder="Email"
+                type="text" />
+            </div>
+            <div class="col-md-6">
+              <label for="subject">Subject</label>
+              <input
+                class="form-control"
+                formControlName="subject"
+                id="subject"
+                placeholder="Enter a subject"
+                type="text" />
+            </div>
+
+            <div class="col-md-12">
+              <label for="review">Write Your Message</label>
+              <textarea
+                class="form-control"
+                formControlName="description"
+                id="exampleFormControlTextarea1"
+                placeholder="Write Your Message"
+                rows="6"></textarea>
+            </div>
+
+            <div class="mb-3">
+              <re-captcha formControlName="captcha" required></re-captcha>
+            </div>
+            <div class="col-md-12">
+              <button class="btn btn-solid" type="submit">
+                Send Your Message
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+<!--Section ends-->
+
+<div class="mt-4">
+  <!-- Display if home page has configuration to display slider in bottom -->
+  <app-carousel
+    *ngIf="
+      layout && layout.slider.displayOnPage && layout.slider.display == 'bottom'
+    "
+    [slides]="layout.slider.slides"></app-carousel>
+  <!-- Display if home page has configuration to display hottest releases in bottom -->
+  <app-hottest-releases
+    *ngIf="
+      layout &&
+      layout.hottest.displayOnPage &&
+      layout.hottest.display == 'bottom' &&
+      hottestReleases
+    "
+    [releases]="hottestReleases"></app-hottest-releases>
+</div>
+<app-header
+  *ngIf="
+    layout &&
+    layout.header &&
+    layout.header.displayOnPage &&
+    layout.header.display == 'bottom'
+  "
+  [imageSrc]="
+    layout.header.imgUrl
+      ? layout.header.imgUrl
+      : 'assets/images/headers/header-brands.png'
+  "
+  [label]="layout.header.label"
+  [link]="layout.header.link"></app-header>
+<app-footer></app-footer>
+<!--section start-->

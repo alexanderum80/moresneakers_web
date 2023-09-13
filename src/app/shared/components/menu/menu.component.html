@@ -1,0 +1,206 @@
+<div class="main-navbar">
+    <div id="mainnav">
+        <div (click)="mainMenuToggle()" class="toggle-nav">
+            <i class="fa fa-bars sidebar-bar"></i>
+        </div>
+        <ul [class.opennav]="navServices?.mainMenuToggle" class="nav-menu">
+            <li class="back-btn">
+                <div (click)="mainMenuToggle()" class="mobile-back text-right">
+                    <span>Back</span>
+                    <i aria-hidden="true" class="fa fa-angle-right pl-2"></i>
+                </div>
+            </li>
+            <li *ngFor="let menuItem of menuItems"
+                [class.mega-menu]="menuItem.megaMenu">
+                <!-- Sub -->
+                <a (click)="toggleNavActive(menuItem)"
+                   *ngIf="menuItem.type === 'sub' && !menuItem.path"
+                   class="nav-link"
+                   href="javascript:void(0)">
+                    {{ menuItem.title | translate }}
+                    <div *ngIf="menuItem.badge" class="lable-nav">
+                        {{ menuItem.badgeText | translate }}
+                    </div>
+                    <span *ngIf="menuItem.children" class="sub-arrow"></span>
+                </a>
+                <a (click)="toggleNavActive(menuItem)"
+                   *ngIf="menuItem.type === 'sub' && menuItem.path"
+                   [routerLink]="menuItem.path"
+                   class="nav-link">
+                    {{ menuItem.title | translate }}
+                    <div *ngIf="menuItem.badge" class="lable-nav">
+                        {{ menuItem.badgeText | translate }}
+                    </div>
+                    <span *ngIf="menuItem.children" class="sub-arrow"></span>
+                </a>
+                <!-- Link -->
+                <a *ngIf="menuItem.type === 'link'"
+                   [routerLinkActiveOptions]="{ exact: true }"
+                   [routerLink]="menuItem.path"
+                   class="nav-link"
+                   routerLinkActive="active">
+                    {{ menuItem.title }}
+                    <div *ngIf="menuItem.badge" class="lable-nav">
+                        {{ menuItem.badgeText | translate }}
+                    </div>
+                    <span *ngIf="menuItem.children" class="sub-arrow"></span>
+                </a>
+                <!-- External Link -->
+                <a *ngIf="menuItem.type === 'extLink'" class="nav-link" href="{{ menuItem.path }}">
+                    {{ menuItem.title }}
+                    <div *ngIf="menuItem.badge" class="lable-nav">
+                        {{ menuItem.badgeText | translate }}
+                    </div>
+                    <span *ngIf="menuItem.children" class="sub-arrow"></span>
+                </a>
+                <!-- External Tab Link -->
+                <a *ngIf="menuItem.type === 'extTabLink'" class="nav-link" href="{{ menuItem.path }}">
+                    {{ menuItem.title }}
+                    <div *ngIf="menuItem.badge" class="lable-nav">
+                        {{ menuItem.badgeText | translate }}
+                    </div>
+                    <span *ngIf="menuItem.children" class="sub-arrow"></span>
+                </a>
+
+                <!-- 2nd Level Menu -->
+                <ul *ngIf="menuItem.children"
+                    [class.opensubmenu]="menuItem.active"
+                    class="nav-submenu">
+                    <li *ngFor="let childrenItem of menuItem.children">
+                        <!-- Sub -->
+                        <a (click)="toggleNavActive(childrenItem)"
+                           *ngIf="childrenItem.type === 'sub'"
+                           href="javascript:void(0)">
+                            {{ childrenItem.title | translate }}
+                            <span *ngIf="childrenItem.badge" class="new-tag">{{
+                                childrenItem.badgeText | translate
+                                }}</span>
+                            <span *ngIf="childrenItem.children" class="sub-arrow"></span>
+                        </a>
+                        <!-- Link -->
+                        <a *ngIf="childrenItem.type === 'link'" href="{{ childrenItem.path }}">
+                            {{ childrenItem.title | translate }}
+                            <span *ngIf="childrenItem.badge" class="new-tag">
+                              {{ childrenItem.badgeText | translate }}
+                            </span>
+                            <span *ngIf="childrenItem.children" class="sub-arrow"></span>
+                        </a>
+                        <!-- External Link -->
+                        <a *ngIf="childrenItem.type === 'extLink'" href="{{ childrenItem.path }}">
+                            {{ childrenItem.title | translate }}
+                            <span *ngIf="childrenItem.badge" class="new-tag">{{
+                                childrenItem.badgeText | translate
+                                }}</span>
+                            <span *ngIf="childrenItem.children" class="sub-arrow"></span>
+                        </a>
+                        <!-- External Tab Link -->
+                        <a *ngIf="childrenItem.type === 'extTabLink'" href="{{ childrenItem.path }}"
+                           target="_blank">
+                            {{ childrenItem.title | translate }}
+                            <span *ngIf="childrenItem.badge" class="new-tag">{{
+                                childrenItem.badgeText | translate
+                                }}</span>
+                            <span *ngIf="childrenItem.children" class="sub-arrow"></span>
+                        </a>
+
+                        <!-- 3rd Level Menu -->
+                        <ul *ngIf="childrenItem.children"
+                            [class.opensubchild]="childrenItem.active"
+                            class="nav-sub-childmenu">
+                            <li *ngFor="let childrenSubItem of childrenItem.children">
+                                <!-- Link -->
+                                <a *ngIf="childrenSubItem.type === 'link'"
+                                   [routerLinkActiveOptions]="{ exact: true }"
+                                   [routerLink]="childrenSubItem.path"
+                                   routerLinkActive="active">
+                                    {{ childrenSubItem.title | translate }}
+                                    <span *ngIf="childrenSubItem.badge" class="new-tag">{{
+                                        childrenSubItem.badgeText | translate
+                                        }}</span>
+                                </a>
+                                <!-- External Link -->
+                                <a *ngIf="childrenSubItem.type === 'extLink'"
+                                   href="{{ childrenSubItem.path }}">
+                                    {{ childrenSubItem.title | translate }}
+                                    <span *ngIf="childrenSubItem.badge" class="new-tag">{{
+                                        childrenSubItem.badgeText | translate
+                                        }}</span>
+                                </a>
+                                <!-- External Tab Link -->
+                                <a *ngIf="childrenSubItem.type === 'extTabLink'"
+                                   href="{{ childrenSubItem.path }}"
+                                   target="_blank">
+                                    {{ childrenSubItem.title | translate }}
+                                    <span *ngIf="childrenSubItem.badge" class="new-tag">{{
+                                        childrenSubItem.badgeText | translate
+                                        }}</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <div *ngIf="menuItem.megaMenu && menuItem.children"
+                     class="mega-menu-container">
+                    <div class="container">
+                        <div class="row">
+                            <div *ngFor="let childrenItem of menuItem.children"
+                                 class="col mega-box">
+                                <div class="link-section">
+                                    <div class="menu-title">
+                                        <h5>
+                                            {{ childrenItem.title | translate }}
+                                            <span *ngIf="childrenItem.children"
+                                                  class="sub-arrow"></span>
+                                        </h5>
+                                    </div>
+                                    <div class="menu-content opensubmegamenu">
+                                        <ul *ngIf="childrenItem.children">
+                                            <li *ngFor="let childrenSubItem of childrenItem.children">
+                                                <!-- Sub -->
+                                                <a *ngIf="childrenSubItem.type === 'sub'"
+                                                   href="javascript:void(0)">
+                                                    {{ childrenSubItem.title | translate }}
+                                                    <span *ngIf="childrenSubItem.badge" class="new-tag">{{
+                                                        childrenSubItem.badgeText | translate
+                                                        }}</span>
+                                                </a>
+                                                <!-- Link -->
+                                                <a *ngIf="childrenSubItem.type === 'link'"
+                                                   [routerLinkActiveOptions]="{ exact: true }"
+                                                   [routerLink]="childrenSubItem.path"
+                                                   routerLinkActive="active">
+                                                    {{ childrenSubItem.title | translate }}
+                                                    <span *ngIf="childrenSubItem.badge" class="new-tag">{{
+                                                        childrenSubItem.badgeText | translate
+                                                        }}</span>
+                                                </a>
+                                                <!-- External Link -->
+                                                <a *ngIf="childrenSubItem.type === 'extLink'"
+                                                   href="{{ childrenSubItem.path }}">
+                                                    {{ childrenSubItem.title | translate }}
+                                                    <span *ngIf="childrenSubItem.badge" class="new-tag">{{
+                                                        childrenSubItem.badgeText | translate
+                                                        }}</span>
+                                                </a>
+                                                <!-- External Tab Link -->
+                                                <a *ngIf="childrenSubItem.type === 'extTabLink'"
+                                                   href="{{ childrenSubItem.path }}"
+                                                   target="_blank">
+                                                    {{ childrenSubItem.title | translate }}
+                                                    <span *ngIf="childrenSubItem.badge" class="new-tag">{{
+                                                        childrenSubItem.badgeText | translate
+                                                        }}</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>

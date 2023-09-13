@@ -1,0 +1,21 @@
+::ng-deep .custom-data h1 span {
+  font-size: 20px;
+  font-weight: 500;
+  color: var(--theme-deafult);
+}
+
+::ng-deep .custom-data p {
+  font-size: 14px;
+  color: #777777;
+  line-height: 1.5;
+}
+
+::ng-deep .custom-data ul {
+  list-style: circle outside;
+  margin-left: 20px;
+  padding-left: 0;
+}
+
+::ng-deep .custom-data li {
+  display: list-item;
+}

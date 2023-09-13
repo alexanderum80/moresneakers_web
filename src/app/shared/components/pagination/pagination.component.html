@@ -1,0 +1,56 @@
+<div class="d-flex flex-wrap justify-content-center">
+    <nav aria-label="...">
+        <ul *ngIf="totalPages > 1" class="pagination d-flex flex-wrap">
+            <li class="page-item">
+                <a [queryParams]="prevFirstPage()"
+                   [routerLink]="[url]"
+                   class="page-link"
+                   queryParamsHandling="merge">
+                    <i class="fa fa-angle-double-left"></i>
+                </a>
+            </li>
+            <li class="page-item">
+                <a [queryParams]="prevQueryPage()"
+                   [routerLink]="[url]"
+                   class="page-link"
+                   queryParamsHandling="merge">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+            </li>
+            <li *ngFor="let page of listPages"
+                [ngClass]="{active: page.value == currentPage.value, disabled: page.value == currentPage.value}"
+                class="page-item">
+                <a *ngIf="page.value > 0 && page.value <= totalPages"
+                   queryParamsHandling="merge"
+                   [routerLink]="[url]"
+                   [queryParams]="getPageQueryFirst(page.value)"
+                   class="page-link"
+                >
+                    {{ page.name }}
+                </a>
+                <!--                [href]="url"-->
+                <span *ngIf="page.value === -1" class="page-link page-link-dots">
+                    {{ page.name }}
+                </span>
+            </li>
+            <ng-container *ngIf="+current + maxPages - 1 < totalPages">
+                <li class="page-item">
+                    <a [queryParams]="nextQueryPage()"
+                       [routerLink]="[url]"
+                       class="page-link"
+                       queryParamsHandling="merge">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                </li>
+                <li class="page-item">
+                    <a [queryParams]="lastQueryPage()"
+                       [routerLink]="[url]"
+                       class="page-link"
+                       queryParamsHandling="merge">
+                        <i class="fa fa-angle-double-right"></i>
+                    </a>
+                </li>
+            </ng-container>
+        </ul>
+    </nav>
+</div>

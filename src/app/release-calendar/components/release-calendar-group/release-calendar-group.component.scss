@@ -1,0 +1,102 @@
+.btn-calendar {
+  border: none;
+  border-radius: 0 4px 4px 0;
+  border-top: 1px solid #e5e5e5;
+  border-right: 1px solid #e5e5e5;
+  border-bottom: 1px solid #e5e5e5;
+  background-color: #fff;
+}
+
+.gray-border {
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.active-month {
+  border-bottom: solid 2px #daab28;
+  opacity: 1 !important;
+}
+
+.custom-tab-title {
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 20px;
+  /* identical to box height */
+  text-transform: uppercase;
+  color: #000000;
+  opacity: 0.5;
+  cursor: pointer;
+}
+
+.btn-calendar:hover {
+  background-color: #daab28;
+
+  .fa-calendar-o {
+    color: #fff !important;
+  }
+}
+
+.fa-calendar-o {
+  color: #e5e5e5 !important;
+}
+
+.filter-text {
+  font-size: 12px;
+  line-height: 15px;
+  text-transform: uppercase;
+  color: #928c8c;
+}
+
+.form-control-calendar {
+  border: none;
+  border-radius: 4px 0 0 4px;
+  border-top: 1px solid #e5e5e5;
+  border-left: 1px solid #e5e5e5;
+  border-bottom: 1px solid #e5e5e5;
+  background-color: #fff;
+  padding: 9px 16px;
+
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 17px;
+  color: #000000;
+}
+
+@media (max-width: 480px) {
+  .custom-tab-title {
+    font-size: 12px;
+    line-height: 15px;
+  }
+}
+
+.form-group.hidden {
+  width: 0;
+  margin: 0;
+  border: none;
+  padding: 0;
+}
+
+.custom-day {
+  text-align: center;
+  padding: 0.185rem 0.25rem;
+  display: inline-block;
+  height: 2rem;
+  width: 2rem;
+}
+
+.custom-day.focused {
+  background-color: #e6e6e6;
+}
+
+.custom-day.range,
+.custom-day:hover {
+  background-color: #daab28;
+  color: white;
+}
+
+.custom-day.faded {
+  background-color: #d8b553;
+}

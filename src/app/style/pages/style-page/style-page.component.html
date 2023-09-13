@@ -1,0 +1,28 @@
+<div class="d-flex flex-column">
+  <app-navbar></app-navbar>
+  <app-ms-breadcrumb
+    *ngIf="style$ | async as Style"
+    [breadcrumb]="[{ name: (style$ | async).name }]">
+  </app-ms-breadcrumb>
+  <div class="container">
+    <app-style-page-header *ngIf="(style$ | async)  && (headingTitle$ | async)"
+                           [title]="headingTitle$ | async"
+                           [description]="(style$ | async).description"
+                           [imgUrl]="(style$ | async).imgUrl">
+    </app-style-page-header>
+    <div class="my-5" id="filterContainer">
+      <app-style-group
+        (changeSortOption)="changeSort($event)"
+        (changeFilters)="changeFilters($event)"
+        [slug]="slug"
+        [count]="selectReleasesByStyleCount$ | async"
+        [currentPage]="currentPage$ | async"
+        [loading]="loading$ | async"
+        [releases]="releasesByStyle$ | async"
+        [totalPages]="totalPages$ | async"
+        [urlFilters]="urlFilters$ | async">
+      </app-style-group>
+    </div>
+  </div>
+  <app-footer></app-footer>
+</div>

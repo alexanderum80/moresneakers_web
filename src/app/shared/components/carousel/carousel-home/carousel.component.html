@@ -1,0 +1,33 @@
+<div *ngIf="slides" class="swipe" id="carousel">
+  <ngb-carousel
+    [showNavigationArrows]="showNavigationArrows"
+    [showNavigationIndicators]="showNavigationIndicators"
+    class="carousel-container">
+    <ng-template *ngFor="let slide of slides" ngbSlide>
+      <a
+        *ngIf="
+          slide.entityType == 'release' || slide.entityType == 'collection'
+        "
+        [routerLink]="[routeFromClick(slide)]"
+        class="picsum-img-wrapper">
+        <img
+          [alt]="slide.description"
+          [src]="width > 480 ? slide.imgUrl : slide.imgMobileUrl"
+          [title]="slide.description"
+          class="carousel-image" />
+      </a>
+      <a
+        *ngIf="slide.entityType == 'offer'"
+        [href]="slide.link"
+        class="picsum-img-wrapper"
+        rel="nofollow"
+        target="_blank">
+        <img
+          [alt]="slide.description"
+          [src]="width > 480 ? slide.imgUrl : slide.imgMobileUrl"
+          [title]="slide.description"
+          class="carousel-image" />
+      </a>
+    </ng-template>
+  </ngb-carousel>
+</div>

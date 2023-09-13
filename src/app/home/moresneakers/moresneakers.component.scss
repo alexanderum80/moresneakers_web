@@ -1,0 +1,32 @@
+.releases-list {
+  margin-right: 5%;
+  margin-left: 5%;
+}
+
+.mb-80 {
+  margin-bottom: 80px;
+}
+
+.modal-iframe {
+  position: fixed;
+  left: 50%;
+  z-index: 1000;
+  transform: translate(-50%, 0);
+  top: 50px;
+}
+
+// iframe {
+//   border: 1px var(--secondary) solid;
+// }
+
+.close-btn {
+  position: absolute;
+  border-radius: 50%;
+  top: -14px;
+  left: -12px;
+  background: #0f0e0e;
+  color: white;
+  border: 1px white solid;
+  width: 30px;
+  height: 30px;
+}

@@ -1,0 +1,18 @@
+<div class="w-100 upcoming-release-container d-flex flex-column flex-md-row">
+  <div class="item-container mt-3 mb-3">
+    <p class="gold-subtitle">No Date Yet</p>
+    <p class="title">more upcoming releases</p>
+    <!-- data = 2 is for upcoming list in releases page -->
+    <a
+      [routerLink]="['/releases']"
+      [state]="{ data: 2 }"
+      class="more-upcoming-button"
+      >See All</a
+    >
+  </div>
+  <div class="scroll">
+    <div *ngFor="let release of releases" class="item-container">
+      <app-product-card [release]="release"></app-product-card>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,25 @@
+<div
+  *ngIf="filterbycolor.length"
+  [class.open]="collapse"
+  class="collection-collapse-block">
+  <h3 (click)="collapse = !collapse" class="collapse-block-title">colors</h3>
+  <div class="collection-collapse-block-content">
+    <div class="collection-brand-filter color-filter">
+      <div
+        *ngFor="let color of filterbycolor"
+        class="custom-control custom-checkbox collection-filter-checkbox">
+        <input
+          (change)="appliedFilter($event)"
+          [checked]="checked(color)"
+          [id]="color"
+          [value]="color"
+          class="custom-control-input"
+          type="checkbox" />
+        <span [class]="color" [ngStyle]="{ 'background-color': color }"></span>
+        <label class="custom-control-label" for="{{ color }}">{{
+          color
+        }}</label>
+      </div>
+    </div>
+  </div>
+</div>

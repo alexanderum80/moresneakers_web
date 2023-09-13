@@ -1,0 +1,22 @@
+<!-- section start -->
+<section class="section-b-space blog-page">
+  <div class="container">
+    <div class="row">
+      <!--Blog List start-->
+      <div class="col-xl-12 col-lg-8 col-md-7">
+        <div class="d-flex flex-column">
+          <app-blogs-list-item
+            *ngFor="let blog of blogs"
+            [blog]="blog"
+            class="my-3"></app-blogs-list-item>
+          <ng-container *ngIf="loading">
+            <app-blog-skeleton-item></app-blog-skeleton-item>
+            <app-blog-skeleton-item></app-blog-skeleton-item>
+          </ng-container>
+        </div>
+      </div>
+      <!--Blog List start-->
+    </div>
+  </div>
+</section>
+<!-- Section ends -->

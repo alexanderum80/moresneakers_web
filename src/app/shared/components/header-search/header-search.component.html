@@ -1,0 +1,35 @@
+<div class="header-search-container">
+  <img
+    [src]="
+      imageUrl
+        ? imageUrl
+        : '../../../../assets/images/headers/header-search-sneakers.png'
+    "
+    alt="header-search-sneakers"
+    class="header-search-image"
+    title="header search sneakers" />
+  <div class="header-search-title-container">
+    <h1 class="header-search-title">
+      {{ title }}
+    </h1>
+    <div class="input-group mt-4 input-search-bar-container">
+      <input
+        (keydown.enter)="navigateToSearchReleases()"
+        [(ngModel)]="searchTerm"
+        aria-describedby="search-button"
+        class="input-search-bar"
+        placeholder="Style, brand, sku, release, color,"
+        type="search" />
+      <div class="input-group-append">
+        <button
+          (click)="navigateToSearchReleases()"
+          class="button-search"
+          id="search-button">
+          <!-- Visible only in xs -->
+          <i class="d-block d-md-none fa fa-search mr-2 ml-2"></i>
+          <span class="d-none d-md-inline">Search</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,15 @@
+<a [routerLink]="[navigateToCategory(category)]"
+   class="d-flex flex-column justify-content-center align-items-center cursor-pointer my-lg-5 my-sm-3">
+    <div *ngIf="category"
+         class="category-container d-flex justify-content-center align-items-center">
+        <img [alt]="category.name"
+             [src]="
+        category.imgUrl
+          ? category.imgUrl
+          : 'assets/images/categories/Training.png'
+      "
+             [title]="category.name"
+             class="category-img"/>
+    </div>
+    <p class="category-name mt-4">{{ category.name }}</p>
+</a>

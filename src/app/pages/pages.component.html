@@ -1,0 +1,5 @@
+<app-header-one
+  *ngIf="url != '/pages/comingsoon'"
+  [sticky]="true"></app-header-one>
+<router-outlet></router-outlet>
+<app-footer-one *ngIf="url != '/pages/comingsoon'"></app-footer-one>

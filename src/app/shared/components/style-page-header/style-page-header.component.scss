@@ -1,0 +1,87 @@
+.header-left {
+  & h1 {
+    font-style: normal;
+    font-weight: 200;
+    font-size: 48px;
+    line-height: 64px;
+    text-transform: none;
+    color: #000000;
+  }
+
+  & h6 {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 18px;
+    color: #000000;
+    margin: 16px 0;
+  }
+
+  & p {
+    font-style: normal;
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 24px;
+    color: #000000;
+    white-space: pre-line;
+  }
+}
+
+.style-banner-card {
+  background: #fafafa;
+  padding: 10px 0 20px 0;
+
+  & h1 {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 56px;
+    color: #daab28;
+    text-transform: none;
+    text-align: center;
+  }
+
+  & img {
+  }
+
+  & button {
+    background: #0f0e0e;
+    border-radius: 8px;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 20px;
+    color: #ffffff;
+    padding: 14px 24px;
+    border: none;
+    transition: all 0.2s ease-in-out;
+
+    &:hover {
+      background-color: #daab28;
+      color: black;
+      transform: scale(1.1);
+    }
+  }
+}
+
+.max-height-300 {
+  max-height: 300px;
+  object-fit: cover;
+}
+
+@media (max-width: 1200px) {
+  .height-300 {
+    height: 200px;
+  }
+}
+
+@media (max-width: 767px) {
+  .height-300 {
+    height: 150px;
+  }
+}
+
+@media (max-width: 480px) {
+  .height-300 {
+    height: 75px;
+  }
+}

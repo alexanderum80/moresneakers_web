@@ -1,0 +1,3 @@
+User-agent: *
+Disallow: https://preprod.moresneakers.com/
+Sitemap: https://moresneakers.com/sitemap.xml

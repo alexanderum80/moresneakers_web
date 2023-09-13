@@ -1,0 +1,38 @@
+<app-breadcrumb [breadcrumb]="'Search'" [title]="'Search'"></app-breadcrumb>
+<!-- section start -->
+<section class="authentication-page section-b-space">
+    <div class="container">
+        <section class="search-block">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 offset-lg-3">
+                        <form class="form-header">
+                            <div class="form-group">
+                                <input
+                                        class="form-control"
+                                        id="exampleInputPassword1"
+                                        placeholder="Search a Product"
+                                        type="text"/>
+                            </div>
+                            <button class="btn btn-primary" type="submit">
+                                <i aria-hidden="true" class="fa fa-search"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div class="col-sm-12 text-center">
+            <img class="img-fluid mb-4" src="assets/images/empty-search.jpg"/>
+            <h3>Sorry! Couldn't find the product you were looking For!!!</h3>
+            <p>
+                Please check if you have misspelt something or try searching with other
+                words.
+            </p>
+            <a [routerLink]="['/shop/collection/left/sidebar']" class="btn btn-solid"
+            >continue shopping</a
+            >
+        </div>
+    </div>
+</section>
+<!-- section end -->

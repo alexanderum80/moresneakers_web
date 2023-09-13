@@ -1,0 +1,124 @@
+<div class="img-wrapper">
+  <div class="lable-block">
+    <span *ngIf="product.new" class="lable3">new</span>
+  </div>
+  <div class="front">
+    <a
+      [routerLink]="[
+        '/shop/product/left/sidebar/',
+        product.title.replace(' ', '-')
+      ]">
+      <img
+        [defaultImage]="
+          ImageSrc ? ImageSrc : 'assets/images/product/placeholder.jpg'
+        "
+        [lazyLoad]="ImageSrc ? ImageSrc : product.images[0].src"
+        alt="{{ product?.images[0].alt }}"
+        class="img-fluid lazy-loading" />
+    </a>
+  </div>
+  <div *ngIf="onHowerChangeImage && product.images.length > 1" class="back">
+    <a
+      [routerLink]="[
+        '/shop/product/left/sidebar/',
+        product.title.replace(' ', '-')
+      ]">
+      <img
+        [src]="ImageSrc ? ImageSrc : product.images[1].src"
+        alt="{{ product?.images[1].alt }}"
+        class="img-fluid lazy-loading" />
+    </a>
+  </div>
+  <ul *ngIf="thumbnail" class="product-thumb-list">
+    <li
+      *ngFor="let image of product.images"
+      [class.active]="ImageSrc == image.src"
+      class="grid_thumb_img">
+      <a (mouseover)="ChangeVariantsImage(image.src)" href="javascript:void(0)">
+        <img [lazyLoad]="image.src" />
+      </a>
+    </li>
+  </ul>
+  <div class="cart-detail">
+    <a
+      (click)="addToWishlist(product)"
+      href="javascript:void(0)"
+      title="Add to Wishlist">
+      <i aria-hidden="true" class="ti-heart"></i>
+    </a>
+    <a
+      (click)="QuickView.openModal()"
+      href="javascript:void(0)"
+      title="Quick View">
+      <i aria-hidden="true" class="ti-search"></i>
+    </a>
+    <a
+      (click)="addToCompare(product)"
+      href="javascript:void(0)"
+      title="Compare">
+      <i aria-hidden="true" class="ti-reload"></i>
+    </a>
+  </div>
+</div>
+<div class="product-info">
+  <div>
+    <bar-rating [rate]="5" [readOnly]="true"></bar-rating>
+    <a
+      [routerLink]="[
+        '/shop/product/left/sidebar/',
+        product?.title.replace(' ', '-')
+      ]">
+      <h6>{{ product?.title | titlecase }}</h6>
+    </a>
+    <h4>
+      {{
+        product?.price * currency?.price
+          | discount : product
+          | currency : currency?.currency : 'symbol'
+      }}
+      <del *ngIf="product?.discount"
+        ><span class="money">
+          {{
+            product?.price * currency?.price
+              | currency : currency?.currency : 'symbol'
+          }}</span
+        >
+      </del>
+    </h4>
+    <ul *ngIf="Color(product?.variants).length" class="color-variant">
+      <li
+        (click)="ChangeVariants(color, product)"
+        *ngFor="let color of Color(product?.variants)"
+        [class]="color"
+        [ngStyle]="{ 'background-color': color }"></li>
+    </ul>
+    <div class="add-btn">
+      <a
+        (click)="CartModal.openModal(product)"
+        *ngIf="cartModal"
+        class="btn btn-outline"
+        href="javascript:void(0)"
+        title="Add to cart">
+        <i class="ti-shopping-cart"></i> Add to cart
+      </a>
+      <a
+        (click)="addToCart(product)"
+        *ngIf="!cartModal"
+        class="btn btn-outline"
+        href="javascript:void(0)"
+        title="Add to cart">
+        <i class="ti-shopping-cart"></i> Add to cart
+      </a>
+    </div>
+  </div>
+</div>
+
+<app-quick-view
+  #quickView
+  [currency]="currency"
+  [product]="product"></app-quick-view>
+<app-cart-modal
+  #cartModal
+  *ngIf="cartModal"
+  [currency]="currency"
+  [product]="product"></app-cart-modal>

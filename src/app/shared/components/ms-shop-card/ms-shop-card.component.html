@@ -1,0 +1,24 @@
+<div class="product-card">
+  <a [routerLink]="generateToLink(item)">
+    <div class="wrapper position-relative d-flex flex-column">
+      <div
+        class="image-wrapper border-bottom d-flex justify-content-center align-items-center">
+        <img [alt]="item.name" [src]="urlToHttps()" [title]="item.name" />
+      </div>
+      <div class="content-wrapper d-flex flex-column align-items-center p-3">
+        <h6
+          [ngClass]="showStoreLinkBtn ? 'subtitle' : 'subtitle cursor-pointer'">
+          {{ item.name }}
+        </h6>
+        <a
+          *ngIf="showStoreLinkBtn"
+          [href]="item.trackingListBaseUrl"
+          class="link"
+          rel="nofollow"
+          target="_blank">
+          Visit store
+        </a>
+      </div>
+    </div>
+  </a>
+</div>

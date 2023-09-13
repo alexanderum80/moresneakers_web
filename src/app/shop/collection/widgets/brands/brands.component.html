@@ -1,0 +1,24 @@
+<div
+  *ngIf="filterbyBrand.length"
+  [class.open]="collapse"
+  class="collection-collapse-block">
+  <h3 (click)="collapse = !collapse" class="collapse-block-title">brand</h3>
+  <div class="collection-collapse-block-content">
+    <div class="collection-brand-filter">
+      <div
+        *ngFor="let brand of filterbyBrand; let i = index"
+        class="custom-control custom-checkbox collection-filter-checkbox">
+        <input
+          (change)="appliedFilter($event)"
+          [checked]="checked(brand)"
+          [id]="brand"
+          [value]="brand"
+          class="custom-control-input"
+          type="checkbox" />
+        <label class="custom-control-label" for="{{ brand }}">{{
+          brand
+        }}</label>
+      </div>
+    </div>
+  </div>
+</div>

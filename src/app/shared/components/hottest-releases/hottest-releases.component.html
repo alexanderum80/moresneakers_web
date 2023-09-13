@@ -1,0 +1,24 @@
+<ngb-carousel *ngIf="releases" [showNavigationIndicators]="false">
+  <ng-template *ngFor="let release of releases" ngbSlide>
+    <div class="picsum-img-wrapper">
+      <div
+        [ngStyle]="{
+          'background-image': 'url(' + release.mainImage + ')'
+        }"
+        class="hero-image">
+        <div
+          class="d-flex justify-content-center flex-column align-items-center">
+          <p class="trending">Trending</p>
+          <p class="hottest-releases-title">Hottest releases</p>
+          <div class="line-hottest-release"></div>
+          <p class="release-name mt-3">
+            {{ release.name }}
+          </p>
+          <a [routerLink]="['/releases', release.slug]" class="custom-button">
+            Details
+          </a>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+</ngb-carousel>

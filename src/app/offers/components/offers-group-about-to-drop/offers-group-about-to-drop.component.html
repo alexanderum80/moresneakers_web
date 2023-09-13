@@ -1,0 +1,56 @@
+<app-head-group-about-to-drop
+        (onSort)="changeSort($event)"
+        *ngIf="!isJustDropped"
+        [count]="offersCount"
+        [defaultSelectedOption]="2"
+        [hideRange]="!isJustDropped"
+        [sortOptions]="sortOptions"
+        [total]="totalOffers">
+</app-head-group-about-to-drop>
+<ng-container *ngIf="loading">
+    <app-skeleton-offer-item *ngFor="let item of [1, 2, 3, 4, 5, 6]" class="w-100"></app-skeleton-offer-item>
+</ng-container>
+
+<!-- Coming Soon -->
+<div *ngIf="offers && !isJustDropped && !isRaffle"
+     class="d-flex flex-wrap mt-3">
+    <app-offers-group-by-date
+            [countDownLabel]="'Releasing in'"
+            [offers]="offers"
+            [order]="'asc'"
+            [showReleaseTime]="false">
+    </app-offers-group-by-date>
+</div>
+
+<!-- Just Dropped -->
+<div *ngIf="offers && isJustDropped" class="d-flex flex-wrap mt-3">
+    <app-offer-item
+            *ngFor="let offer of offers"
+            [isJustDropped]="isJustDropped"
+            [offer]="offer"
+            class="w-100">
+    </app-offer-item>
+</div>
+
+<!-- Raffles -->
+<div *ngIf="offers && isRaffle" class="d-flex flex-wrap mt-3">
+    <div *ngIf="(openRaffles$ | async).length">
+        <h3>Open raffles</h3>
+        <app-offers-group-by-date
+                [countDownLabel]="'Ending in'"
+                [groupBy]="'raffleEnd'"
+                [offers]="openRaffles$ | async"
+                [order]="'asc'">
+        </app-offers-group-by-date>
+    </div>
+    <div *ngIf="(closedRaffles$ | async).length">
+        <h3>Closed raffles in the past 7 days</h3>
+        <app-offers-group-by-date
+                [countDownLabel]="'Ending in'"
+                [groupBy]="'raffleEnd'"
+                [offers]="closedRaffles$ | async"
+                [order]="'desc'"
+                [prefix]="'Ended on'">
+        </app-offers-group-by-date>
+    </div>
+</div>

@@ -1,0 +1,101 @@
+/* You can add global styles to this file, and also import other style files */
+
+.page-item.active .page-link {
+  z-index: 3;
+  color: #fff;
+  background-color: #daab28;
+  border-color: #daab28;
+}
+
+.page-item:first-child .page-link {
+  position: relative;
+  display: block;
+  line-height: 1.25;
+  color: #fff;
+  background-color: #565656;
+  border: 0 solid #dee2e6;
+  border-radius: 50%;
+  margin: 3px;
+}
+
+.page-item:last-child .page-link {
+  position: relative;
+  display: block;
+  line-height: 1.25;
+  color: #fff;
+  background-color: #565656;
+  border: 0 solid #dee2e6;
+  border-radius: 50%;
+  margin: 3px;
+}
+
+.page-link {
+  position: relative;
+  display: block;
+  line-height: 1.25;
+  color: #fff;
+  background-color: #565656;
+  border: 0 solid #dee2e6;
+  border-radius: 50%;
+  margin: 3px;
+  text-align: center;
+  min-width: 35px;
+}
+
+.page-link.page-link-dots {
+  font-size: 1.1em;
+  color: black;
+  background-color: white;
+}
+
+.page-link:hover {
+  z-index: 2;
+  color: #fff;
+  text-decoration: none;
+  background-color: #e4c676;
+  border-color: #e4c676;
+}
+
+.page-link.page-link-dots:hover {
+  color: black;
+  background-color: white;
+}
+
+/* zoom product gallery */
+.galleria {
+  .thumbnail {
+    border-radius: 8px !important;
+  }
+
+  .thumbnail::after {
+    background-color: black;
+    height: 8px;
+    width: 100%;
+    position: absolute;
+    left: auto !important;
+    right: auto !important;
+    top: auto !important;
+    bottom: 0 !important;
+    border-radius: 0 0 8px 8px !important;
+    -webkit-animation: none !important;
+    animation: none !important;
+  }
+}
+
+.control.right-top {
+  .close::before {
+    background-image: url(assets/images/icon/close.svg) !important;
+  }
+}
+
+.control.arrow.left {
+  background-image: url(assets/images/icon/left.svg) !important;
+}
+
+.control.arrow.right {
+  background-image: url(assets/images/icon/right.svg) !important;
+}
+
+#filterContainer {
+  padding-top: 8px;
+}

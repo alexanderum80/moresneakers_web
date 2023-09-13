@@ -1,0 +1,13 @@
+<app-head-group
+        (onSort)="changeSort($event)"
+        [count]="offersCount"
+        [defaultSelectedOption]="1"
+        [sortOptions]="sortOptions"
+        [total]="totalOffers">
+</app-head-group>
+<div *ngIf="offers" class="d-flex flex-wrap mt-3">
+    <app-offer-item *ngFor="let offer of offers" [offer]="offer" class="w-100"></app-offer-item>
+    <ng-container *ngIf="loading">
+        <app-skeleton-offer-item *ngFor="let item of [1, 2, 3, 4, 5, 6]" class="w-100"></app-skeleton-offer-item>
+    </ng-container>
+</div>

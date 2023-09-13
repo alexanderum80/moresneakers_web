@@ -1,0 +1,10 @@
+<div class="container">
+    <ng-container *ngIf="(thisWeekDeals$ | async)?.length">
+        <h3>Ending this week</h3>
+        <app-deals-grid-list [deals]="thisWeekDeals$ | async"></app-deals-grid-list>
+    </ng-container>
+    <ng-container *ngIf="(currenDeals$ | async)?.length">
+        <h3>Current deals</h3>
+        <app-deals-grid-list [deals]="currenDeals$ | async"></app-deals-grid-list>
+    </ng-container>
+</div>

@@ -1,0 +1,169 @@
+<!-- footer -->
+<footer [ngClass]="class">
+  <div *ngIf="mainFooter" class="white-layout">
+    <section class="p-0">
+      <div class="container-fluid">
+        <div class="row footer-theme2 section-light footer-border">
+          <div class="col">
+            <div class="footer-block">
+              <div class="footer-container">
+                <div class="footer-title footer-mobile-title">
+                  <h4>about</h4>
+                </div>
+                <div class="footer-contant">
+                  <div class="footer-logo">
+                    <img [src]="themeLogo" alt="" />
+                  </div>
+                  <div class="social-white">
+                    <ul>
+                      <li>
+                        <a href="javascript:void(0)"
+                          ><i aria-hidden="true" class="fa fa-facebook"></i
+                        ></a>
+                      </li>
+                      <li>
+                        <a href="javascript:void(0)"
+                          ><i aria-hidden="true" class="fa fa-google-plus"></i
+                        ></a>
+                      </li>
+                      <li>
+                        <a href="javascript:void(0)"
+                          ><i aria-hidden="true" class="fa fa-twitter"></i
+                        ></a>
+                      </li>
+                      <li>
+                        <a href="javascript:void(0)"
+                          ><i aria-hidden="true" class="fa fa-instagram"></i
+                        ></a>
+                      </li>
+                      <li>
+                        <a href="javascript:void(0)"
+                          ><i aria-hidden="true" class="fa fa-rss"></i
+                        ></a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col form-p p-0">
+            <div class="footer-block">
+              <div class="subscribe-white">
+                <h2>newsletter</h2>
+                <form>
+                  <div class="form-group">
+                    <input
+                      class="form-control"
+                      id="exampleFormControlInput"
+                      placeholder="Enter your email"
+                      type="text" />
+                    <button class="btn btn-solid black-btn" type="submit">
+                      subscribe
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="footer-block">
+              <div class="footer-container">
+                <div class="footer-title">
+                  <h4>store information</h4>
+                </div>
+                <div class="footer-contant">
+                  <ul class="contact-details">
+                    <li>Multikart Demo Store, Demo store India 345-659</li>
+                    <li>Call Us: 123-456-7898</li>
+                    <li>
+                      Email Us:
+                      <a href="javascript:void(0)">Support@mail.com</a>
+                    </li>
+                    <li>Fax: 123456</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+  <div *ngIf="subFooter" class="white-layout box-layout">
+    <div class="container">
+      <section class="small-section">
+        <div class="row footer-theme2">
+          <div class="col">
+            <div class="footer-link link-white">
+              <div class="footer-title">
+                <h4>my account</h4>
+              </div>
+              <div class="footer-contant">
+                <ul>
+                  <li><a href="javascript:void(0)">mens</a></li>
+                  <li><a href="javascript:void(0)">womens</a></li>
+                  <li><a href="javascript:void(0)">clothing</a></li>
+                  <li><a href="javascript:void(0)">accessories</a></li>
+                  <li><a href="javascript:void(0)">featured</a></li>
+                  <li><a href="javascript:void(0)">service</a></li>
+                  <li><a href="javascript:void(0)">cart</a></li>
+                  <li><a href="javascript:void(0)">my order</a></li>
+                  <li><a href="javascript:void(0)">FAQ</a></li>
+                  <li><a href="javascript:void(0)">new product</a></li>
+                  <li><a href="javascript:void(0)">featured product</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+  <div class="sub-footer black-subfooter">
+    <div class="container">
+      <div class="row">
+        <div class="col-xl-6 col-md-6 col-sm-12">
+          <div class="footer-end">
+            <p>
+              <i aria-hidden="true" class="fa fa-copyright"></i>
+              {{ today | date : 'y' }} themeforest powered by pixelstrap
+            </p>
+          </div>
+        </div>
+        <div class="col-xl-6 col-md-6 col-sm-12">
+          <div class="payment-card-bottom">
+            <ul>
+              <li>
+                <a href="javascript:void(0)"
+                  ><img alt="" src="assets/images/icon/visa.png"
+                /></a>
+              </li>
+              <li>
+                <a href="javascript:void(0)"
+                  ><img alt="" src="assets/images/icon/mastercard.png"
+                /></a>
+              </li>
+              <li>
+                <a href="javascript:void(0)"
+                  ><img alt="" src="assets/images/icon/paypal.png"
+                /></a>
+              </li>
+              <li>
+                <a href="javascript:void(0)"
+                  ><img alt="" src="assets/images/icon/american-express.png"
+                /></a>
+              </li>
+              <li>
+                <a href="javascript:void(0)"
+                  ><img alt="" src="assets/images/icon/discover.png"
+                /></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+<!-- footer end -->

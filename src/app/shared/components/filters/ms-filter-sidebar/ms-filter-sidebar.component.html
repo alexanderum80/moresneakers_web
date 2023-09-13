@@ -1,0 +1,90 @@
+<div class="collection-filter-block">
+    <div *ngIf="options.length || isRange"
+         [class.open]="collapse"
+         class="collection-collapse-block">
+    <span *ngIf="!isSelect" class="remove-filter-container">
+      <i (click)="removeFilter()" aria-hidden="true" class="fa fa-times"></i>
+    </span>
+        <span (click)="collapse = !collapse" class="collapse-block-title">
+            {{ filterTitle }}
+        </span>
+        <div class="collection-collapse-block-content">
+            <div class="collection-brand-filter">
+                <ng-container *ngIf="isRadio">
+                    <div *ngFor="let option of options; let i = index"
+                         class="custom-control custom-checkbox collection-filter-checkbox">
+                        <input (input)="appliedFilter(option.id)"
+                               [checked]="checked(option.id)"
+                               [id]="option.id"
+                               [value]="option.name"
+                               class="form-check-input"
+                               type="radio"/>
+                        <label [for]="option.id" class="form-check-label">
+                            <div class="d-flex align-items-center">
+                                <div *ngIf="option.color"
+                                     [style.backgroundColor]="option.color"
+                                     class="color-box mx-2">
+                                </div>
+                                {{ option.name }}
+                            </div>
+                        </label>
+                    </div>
+                </ng-container>
+
+                <ng-container *ngIf="multiple && !isRange && !isSelect && !isRadio">
+                    <div *ngFor="let option of options; let i = index"
+                         class="custom-control custom-checkbox collection-filter-checkbox">
+                        <input (input)="appliedFilter(option.id)"
+                               [checked]="checked(option.id)"
+                               [id]="option.id"
+                               [value]="option.name"
+                               class="custom-control-input"
+                               type="checkbox"/>
+                        <label [for]="option.id" class="custom-control-label">
+                            <div class="d-flex align-items-center">
+                                <div *ngIf="option.color"
+                                     [style.backgroundColor]="option.color"
+                                     class="color-box mx-2"></div>
+                                {{ option.name }}
+                            </div>
+                        </label>
+                    </div>
+                </ng-container>
+                <ng-container *ngIf="!multiple && !isRange && !isSelect && !isRadio">
+                    <ul class="category-list">
+                        <li (click)="appliedFilterUnique(option)"
+                            *ngFor="let option of options"
+                            class="py-2 single-item">
+                            {{ option.name }}
+                        </li>
+                    </ul>
+                </ng-container>
+                <ng-container *ngIf="isRange">
+                    <div class="mt-2">
+                        <ngx-slider (userChangeEnd)="changeRangeValue($event)"
+                                    *ngIf="isBrowser"
+                                    [(highValue)]="maxRange"
+                                    [(value)]="minRange"
+                                    [options]="sliderOpts">
+                        </ngx-slider>
+                    </div>
+                </ng-container>
+
+                <ng-container *ngIf="isSelect && !isRadio">
+                    <div class="mt-2">
+                        <ng-select (change)="changeSelection($event)"
+                                   [closeOnSelect]="false"
+                                   [items]="options"
+                                   [multiple]="multiple"
+                                   [placeholder]="selectedOptions.length ? '' : 'Select stores'"
+                                   appendTo="body"
+                                   bindLabel="name"
+                                   bindValue="id"
+                                   class="custom">
+                        </ng-select>
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+    </div>
+</div>

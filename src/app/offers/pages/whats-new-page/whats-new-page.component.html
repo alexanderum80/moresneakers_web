@@ -1,0 +1,197 @@
+<div (scrolled)="onScroll()"
+     [infiniteScrollDistance]="2"
+     class="d-flex flex-column my-container"
+     infiniteScroll>
+    <app-navbar></app-navbar>
+    <app-partnership></app-partnership>
+    <app-ms-breadcrumb *ngIf="!statusString || statusString == ''"
+                       [breadcrumb]="[{ name: 'What\'s new' }]">
+    </app-ms-breadcrumb>
+    <app-ms-breadcrumb
+            *ngIf="statusString && statusString != ''"
+            [breadcrumb]="[{ name: 'What\'s new', url: 'whats-new' }, { name: statusString }]">
+    </app-ms-breadcrumb>
+    <div class="container">
+        <div *ngIf="layout?.deals?.displayOnPage" class="row">
+            <div *ngFor="let item of layout?.deals?.deals"
+                 class="col-lg-6 col-md-6 col-sm-12 my-3">
+                <app-discount-offer-item [item]="item"></app-discount-offer-item>
+            </div>
+        </div>
+        <div class="d-flex flex-lg-nowrap flex-md-wrap">
+            <div class="flex-grow-1">
+                <app-heading
+                        *ngIf="layout && layout.heading && layout.heading.displayOnPage"
+                        [description]="layout.heading.description"
+                        [imgUrl]="layout.heading.imgUrl ? layout.heading.imgUrl : 'assets/images/headers/whats-new.png'"
+                        [title]="layout.heading.title">
+                </app-heading>
+                <app-header
+                        *ngIf="layout && layout.header && layout.header.displayOnPage && layout.header.display == 'top'"
+                        [imageSrc]="layout.header.imgUrl ? layout.header.imgUrl : 'assets/images/headers/whats-new.png'"
+                        [label]="layout.header.label"
+                        [link]="layout.header.link">
+                </app-header>
+                <!-- Display if home page has configuration to display hottest releases in top -->
+                <app-hottest-releases *ngIf="layout && layout.hottest.displayOnPage && layout.hottest.display == 'top'"
+                                      [releases]="hottestReleases$ | async">
+                </app-hottest-releases>
+                <!-- Display if home page has configuration to display slider in top -->
+                <app-carousel *ngIf="layout && layout.slider.displayOnPage && layout.slider.display == 'top'"
+                              [slides]="layout.slider.slides">
+                </app-carousel>
+                <div id="filterContainer">
+                    <!-- Filters to small devices -->
+                    <div class="display-only-in-small-devices">
+                        <div [class.open]="collapseFilters"
+                             class="collection-collapse-block">
+                            <button (click)="collapseFilters = !collapseFilters"
+                                    class="custom-filter-buttom mb-3">
+                                <i aria-hidden="true" class="fa fa-filter mr-1"></i>
+                                Filters
+                            </button>
+                            <div class="collection-collapse-block-content">
+                                <div class="d-flex flex-column justify-content-center align-items-center mt-2">
+                                    <div class="border-filter-box">
+                                        <app-ms-filter-sidebar
+                                                (optionsFilter)="setFiltersShop($event)"
+                                                *ngIf="shops"
+                                                [filterTitle]="'Shops'"
+                                                [isSelect]="true"
+                                                [multiple]="true"
+                                                [options]="shops"
+                                                [selectedOptions]="selectedShops$ | async">
+                                        </app-ms-filter-sidebar>
+                                    </div>
+                                    <div class="border-filter-box">
+                                        <app-ms-filter-sidebar
+                                                (optionsFilter)="setFiltersBrands($event)"
+                                                *ngIf="brands"
+                                                [filterTitle]="'Brands'"
+                                                [multiple]="true"
+                                                [options]="brands"
+                                                [selectedOptions]="selectedBrands$ | async">
+                                        </app-ms-filter-sidebar>
+                                    </div>
+                                    <div class="border-filter-box">
+                                        <app-ms-filter-sidebar
+                                                (optionsFilter)="setFiltersColors($event)"
+                                                [multiple]="true"
+                                                [options]="coloredOptions"
+                                                [filterTitle]="'Colors'"
+                                                [selectedOptions]="selectedColors$ | async">
+                                        </app-ms-filter-sidebar>
+                                    </div>
+                                    <div class="border-filter-box">
+                                        <app-ms-filter-sidebar
+                                                (optionsFilter)="setFiltersShipping($event)"
+                                                [filterTitle]="'Shipping'"
+                                                [multiple]="true"
+                                                [options]="shippingRegions"
+                                                [selectedOptions]="selectedShipping$ | async">
+                                        </app-ms-filter-sidebar>
+                                    </div>
+
+                                    <!-- Hidde Filter because is not implemented in API yet -->
+                                    <!-- <app-ms-filter-sidebar
+                                                          filterTitle="Size"
+                                                          [options]="sizeOptions"
+                                                          (optionsFilter)="setFiltersSize($event)"
+                                                        ></app-ms-filter-sidebar> -->
+                                    <div class="border-filter-box">
+                                        <app-ms-filter-sidebar
+                                                (optionsFilter)="setFiltersPrice($event)"
+                                                [filterTitle]="'Price'"
+                                                [isRange]="true">
+                                        </app-ms-filter-sidebar>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- END Filters -->
+                    </div>
+                    <div class="d-flex flex-lg-nowrap flex-md-wrap">
+                        <!-- Filters to hight devices -->
+                        <div class="d-flex flex-column mr-4 display-only-hight-resolutions">
+                            <div class="border-filter-box">
+                                <app-ms-filter-sidebar
+                                        (optionsFilter)="setFiltersShop($event)"
+                                        *ngIf="shops"
+                                        [filterTitle]="'Shops'"
+                                        [isSelect]="true"
+                                        [multiple]="true"
+                                        [options]="shops"
+                                        [selectedOptions]="selectedShops$ | async">
+                                </app-ms-filter-sidebar>
+                            </div>
+                            <div class="border-filter-box">
+                                <app-ms-filter-sidebar
+                                        (optionsFilter)="setFiltersBrands($event)"
+                                        *ngIf="brands"
+                                        [filterTitle]="'Brands'"
+                                        [multiple]="true"
+                                        [options]="brands"
+                                        [selectedOptions]="selectedBrands$ | async">
+                                </app-ms-filter-sidebar>
+                            </div>
+                            <div class="border-filter-box">
+                                <app-ms-filter-sidebar
+                                        (optionsFilter)="setFiltersColors($event)"
+                                        [multiple]="true"
+                                        [options]="coloredOptions"
+                                        [filterTitle]="'Colors'"
+                                        [selectedOptions]="selectedColors$ | async">
+                                </app-ms-filter-sidebar>
+                            </div>
+                            <div class="border-filter-box">
+                                <app-ms-filter-sidebar
+                                        (optionsFilter)="setFiltersShipping($event)"
+                                        [filterTitle]="'Shippings'"
+                                        [multiple]="true"
+                                        [options]="shippingRegions"
+                                        [selectedOptions]="selectedShipping$ | async">
+                                </app-ms-filter-sidebar>
+                            </div>
+                            <!-- Hidde Filter because is not implemented in API yet -->
+                            <!-- <app-ms-filter-sidebar
+                                        filterTitle="Sizes"
+                                        [options]="sizeOptions"
+                                        (optionsFilter)="setFiltersSize($event)"
+                                      ></app-ms-filter-sidebar> -->
+                            <div class="border-filter-box">
+                                <app-ms-filter-sidebar
+                                        (optionsFilter)="setFiltersPrice($event)"
+                                        [filterTitle]="'Price'"
+                                        [isRange]="true">
+                                </app-ms-filter-sidebar>
+                            </div>
+                        </div>
+
+                        <app-offers-group
+                                (changeSortOption)="changeSort($event)"
+                                [loading]="loading$ | async"
+                                [offersCount]="offersCount$ | async"
+                                [offers]="offers$ | async"
+                                [totalOffers]="totalOffers$ | async">
+                        </app-offers-group>
+                    </div>
+                </div>
+                <!-- Display if home page has configuration to display slider in bottom -->
+                <app-carousel *ngIf="layout && layout.slider.displayOnPage && layout.slider.display == 'bottom'"
+                              [slides]="layout.slider.slides">
+                </app-carousel>
+                <!-- Display if home page has configuration to display hottest releases in bottom -->
+                <app-hottest-releases
+                        *ngIf="layout && layout.hottest.displayOnPage && layout.hottest.display == 'bottom'"
+                        [releases]="hottestReleases$ | async"></app-hottest-releases>
+                <app-header
+                        *ngIf="layout && layout.header && layout.header.displayOnPage && layout.header.display == 'bottom'"
+                        [imageSrc]="layout.header.imgUrl ? layout.header.imgUrl: 'assets/images/headers/header-brands.png'"
+                        [label]="layout.header.label"
+                        [link]="layout.header.link">
+                </app-header>
+            </div>
+        </div>
+    </div>
+    <app-footer></app-footer>
+</div>

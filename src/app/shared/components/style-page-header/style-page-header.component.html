@@ -1,0 +1,11 @@
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <div class="d-flex flex-column header-left">
+                <img *ngIf="imgUrl" [src]="imgUrl" alt="" class="max-height-300 height-300"/>
+                <h1>{{ title }}</h1>
+                <p [innerHTML]="description"></p>
+            </div>
+        </div>
+    </div>
+</div>

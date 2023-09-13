@@ -1,0 +1,45 @@
+<div class="d-flex flex-column">
+    <app-navbar></app-navbar>
+    <app-ms-breadcrumb [breadcrumb]="[{ name: 'Deals' }]"></app-ms-breadcrumb>
+    <div class="container">
+        <app-heading
+                *ngIf="layout && layout.heading && layout.heading.displayOnPage"
+                [title]="layout.heading.title ? layout.heading.title: defaultTitle"
+                [description]="layout.heading.description ? layout.heading.description : defaultDescription"
+                [imgUrl]="layout.heading.imgUrl ? layout.heading.imgUrl : 'assets/images/headers/header-categories.png'">
+        </app-heading>
+        <app-header
+                *ngIf="layout && layout.header && layout.header.displayOnPage && layout.header.display == 'top'"
+                [imageSrc]="layout.header.imgUrl ? layout.header.imgUrl : 'assets/images/headers/whats-new.png'"
+                [label]="layout.header.label"
+                [link]="layout.header.link">
+        </app-header>
+
+        <!-- Display if home page has configuration to display hottest releases in top -->
+        <app-hottest-releases *ngIf="layout && layout.hottest.displayOnPage && layout.hottest.display == 'top'"
+                              [releases]="hottestReleases$ | async">
+        </app-hottest-releases>
+
+        <!-- Display if home page has configuration to display slider in top -->
+        <app-carousel *ngIf="layout && layout.slider.displayOnPage && layout.slider.display == 'top'"
+                      [slides]="layout.slider.slides">
+        </app-carousel>
+        <div class="my-5">
+            <app-deals-page-body [deals]="deals$ | async"></app-deals-page-body>
+        </div>
+        <div class="mt-4">
+            <!-- Display if home page has configuration to display slider in bottom -->
+            <app-carousel
+                    *ngIf="layout && layout.slider.displayOnPage && layout.slider.display == 'bottom'"
+                    [slides]="layout.slider.slides">
+            </app-carousel>
+            <!-- Display if home page has configuration to display hottest releases in bottom -->
+            <app-hottest-releases
+                    *ngIf="layout && layout.hottest.displayOnPage && layout.hottest.display == 'bottom'"
+                    [releases]="hottestReleases$ | async">
+            </app-hottest-releases>
+        </div>
+    </div>
+    <app-footer></app-footer>
+</div>
+

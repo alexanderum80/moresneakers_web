@@ -1,0 +1,15 @@
+<div class="container">
+    <div class="style-title">
+        <h3>{{ releases[0].style.name }}</h3>
+    </div>
+    <div class="d-flex justify-content-start flex-wrap mt-4">
+        <app-responsive-product-card
+                *ngFor="let item of releases"
+                [release]="item"
+                class="my-2">
+        </app-responsive-product-card>
+        <ng-container *ngIf="loading">
+            <app-skeleton-product-box *ngFor="let item of [1, 2, 3, 4, 5, 6, 7, 8]"></app-skeleton-product-box>
+        </ng-container>
+    </div>
+</div>

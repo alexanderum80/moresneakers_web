@@ -1,0 +1,68 @@
+<div (scrolled)="onScroll()"
+     [alwaysCallback]="true"
+     [infiniteScrollDistance]="2"
+     class="d-flex flex-column h-100"
+     infiniteScroll>
+  <app-navbar></app-navbar>
+  <app-ms-breadcrumb
+          [breadcrumb]="[{ name: 'Release Calendar' }]">
+  </app-ms-breadcrumb>
+  <div class="container">
+    <app-heading
+            *ngIf="layout && layout.heading && layout.heading.displayOnPage"
+            [description]="layout.heading.description"
+            [imgUrl]="layout.heading.imgUrl? layout.heading.imgUrl: 'assets/images/headers/header-release-calendar.png'"
+            [title]="layout.heading.title"></app-heading>
+    <app-header *ngIf="layout && layout.header && layout.header.displayOnPage && layout.header.display == 'top'"
+                [imageSrc]="layout.header.imgUrl ? layout.header.imgUrl : 'assets/images/headers/header-brands.png'"
+                [label]="layout.header.label"
+                [link]="layout.header.link"></app-header>
+    <div class="mt-4">
+      <!-- Display if home page has configuration to display slider in bottom -->
+      <app-carousel *ngIf="layout && layout.slider.displayOnPage && layout.slider.display == 'top'"
+                    [slides]="layout.slider.slides"></app-carousel>
+      <!-- Display if home page has configuration to display hottest releases in bottom -->
+      <app-hottest-releases *ngIf="layout && layout.hottest.displayOnPage && layout.hottest.display == 'top'"
+                            [releases]="hottestReleases$ | async">
+      </app-hottest-releases>
+    </div>
+    <div *ngIf="layout?.deals?.displayOnPage" class="row">
+      <div *ngFor="let item of layout?.deals?.deals"
+           class="col-lg-6 col-md-6 col-sm-12 my-3">
+        <app-discount-offer-item [item]="item"></app-discount-offer-item>
+      </div>
+    </div>
+    <div class="mt-4">
+      <app-release-calendar-group
+              (onChangeMonth)="changeMonth($event)"
+              (onSelectRange)="selectReleaseInRange($event)"
+              [month]="currentMonth"
+              [releasesInline]="releasesInline$ | async"
+              [releases]="releasesScheduled$ | async"
+              [year]="currentYear">
+      </app-release-calendar-group>
+    </div>
+    <div class="mt-5">
+      <app-more-upcoming-releases
+              [releases]="upcomingReleases$ | async">
+      </app-more-upcoming-releases>
+    </div>
+    <offers-pinned [offersPinned]="offersPinned$ | async"></offers-pinned>
+    <div class="mt-4">
+      <!-- Display if home page has configuration to display slider in bottom -->
+      <app-carousel *ngIf="layout && layout.slider.displayOnPage && layout.slider.display == 'bottom'"
+                    [slides]="layout.slider.slides">
+      </app-carousel>
+      <!-- Display if home page has configuration to display hottest releases in bottom -->
+      <app-hottest-releases *ngIf="layout && layout.hottest.displayOnPage && layout.hottest.display == 'bottom'"
+                            [releases]="hottestReleases$ | async">
+      </app-hottest-releases>
+    </div>
+    <app-header *ngIf="layout && layout.header && layout.header.displayOnPage && layout.header.display == 'bottom'"
+                [imageSrc]="layout.header.imgUrl ? layout.header.imgUrl : 'assets/images/headers/header-brands.png'"
+                [label]="layout.header.label"
+                [link]="layout.header.link">
+    </app-header>
+  </div>
+  <app-footer></app-footer>
+</div>

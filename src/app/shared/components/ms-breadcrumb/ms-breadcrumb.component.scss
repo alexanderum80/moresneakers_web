@@ -1,0 +1,26 @@
+.page-title {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 18px;
+  text-align: center;
+  color: #000000;
+}
+
+.ms-breadcrumb {
+  display: block;
+}
+
+@media (max-width: 766px) {
+  .ms-breadcrumb {
+    display: none;
+  }
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.breadcrumb-item.active {
+  color: #000000 !important;
+}

@@ -1,0 +1,43 @@
+.title1 {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 64px;
+  text-align: center;
+  color: #daab28;
+
+  & .title-inner1 {
+    font-style: normal;
+    font-weight: 200;
+    font-size: 32px;
+    line-height: 64px;
+    text-align: center;
+    text-transform: none;
+    color: #000000;
+
+    &::after {
+      width: 100px;
+      height: 4px !important;
+    }
+  }
+}
+
+.rectangle {
+  position: absolute;
+  left: 85%;
+  margin-top: -43px;
+  width: 88.94px;
+  height: 88.94px;
+  background: #f9f9f9;
+  transform: rotate(45deg);
+}
+
+@media (max-width: 1000px) {
+  .rectangle {
+    position: absolute;
+    left: 48%;
+    margin-top: -14px;
+    width: 28px;
+    height: 28px;
+  }
+}

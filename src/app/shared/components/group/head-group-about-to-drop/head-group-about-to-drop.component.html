@@ -1,0 +1,28 @@
+<div
+  class="d-flex flex-wrap align-items-center justify-content-between borders-group">
+  <div class="py-3">
+    <p *ngIf="!hideRange" class="text-group">
+      Showing Products {{ from() }}-{{ to() }} of {{ total }} Results
+    </p>
+    <p *ngIf="hideRange" class="text-group">Showing {{ total }} Results</p>
+  </div>
+  <!-- <div class="py-3">
+      <div ngbDropdown class="d-inline-block">
+        <button class="custom-dropdown" id="sortItems" ngbDropdownToggle>
+          {{ sortText }}
+          <i class="fa fa-angle-down ml-4"></i>
+        </button>
+        <div ngbDropdownMenu aria-labelledby="sortItems">
+          <button
+            (click)="changeSortOption(item)"
+            class="myDropDownItem my-1"
+            [ngClass]="sortText == item.name ? 'myDropDownItemSelected' : ''"
+            *ngFor="let item of sortOptions"
+            ngbDropdownItem
+          >
+            {{ item.name }}
+          </button>
+        </div>
+      </div>
+    </div> -->
+</div>

@@ -1,0 +1,135 @@
+.carousel-container {
+  height: 200px;
+  width: 100%;
+  position: relative;
+}
+
+.carousel-container:hover {
+  cursor: pointer;
+}
+
+.carousel-image {
+  width: 100%;
+  height: 200px;
+}
+
+img {
+  object-fit: cover;
+}
+
+::ng-deep .carousel-caption {
+  position: absolute;
+  left: auto;
+  right: 80px;
+  top: 35px;
+  bottom: auto;
+  // z-index: 10;
+  z-index: 0;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  color: #fff;
+  text-align: left;
+}
+
+::ng-deep .carousel-indicators {
+  position: absolute;
+  right: 0;
+  bottom: 1px;
+  left: 0;
+  // z-index: 15;
+  z-index: 1;
+  display: flex;
+  justify-content: flex-end;
+  padding-left: 0;
+  margin-left: 15%;
+  list-style: none;
+  align-items: center;
+}
+
+::ng-deep .carousel-indicators li {
+  box-sizing: content-box;
+  flex: 0 1 auto;
+  width: 8px;
+  height: 8px;
+  margin-right: 3px;
+  margin-left: 3px;
+  text-indent: -999px;
+  cursor: pointer;
+  background-color: #fff;
+  background-clip: padding-box;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  opacity: 1;
+  transition: opacity 0.6s ease;
+  border-radius: 50%;
+}
+
+::ng-deep .carousel-indicators .active {
+  opacity: 1;
+  width: 14px;
+  height: 14px;
+}
+
+.carousel-title {
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 28px;
+  color: #000000;
+  margin-bottom: 8px;
+  width: 470px;
+}
+
+.carousel-link {
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 28px;
+  text-decoration-line: underline;
+  color: #ffffff;
+}
+
+.carousel-link:hover {
+  cursor: pointer;
+}
+
+@media (max-width: 766px) {
+  .carousel-container {
+    height: 273px;
+  }
+
+  .carousel-image {
+    width: 100%;
+    height: 273px;
+  }
+
+  ::ng-deep .carousel-caption {
+    position: absolute;
+    left: 32px;
+    right: 32px;
+    top: 20px;
+    bottom: auto;
+    // z-index: 10;
+    z-index: 0;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    color: #fff;
+    text-align: left;
+  }
+
+  ::ng-deep .carousel-indicators {
+    display: none;
+  }
+
+  .carousel-title {
+    width: 100%;
+  }
+
+  @media (max-width: 766px) {
+    ::ng-deep .carousel-indicators {
+      display: none;
+    }
+  }
+}

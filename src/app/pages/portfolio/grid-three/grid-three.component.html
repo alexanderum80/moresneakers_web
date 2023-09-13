@@ -1,0 +1,63 @@
+<app-breadcrumb
+  [breadcrumb]="'Portfolio'"
+  [title]="'Portfolio'"></app-breadcrumb>
+<!-- Our Project Start -->
+<section class="portfolio-section grid-portfolio">
+  <div class="container">
+    <div align="center" id="form1">
+      <button
+        (click)="filter('all')"
+        [class.active]="galleryFilter == 'all'"
+        class="filter-button project_button">
+        All
+      </button>
+      <button
+        (click)="filter('fashion')"
+        [class.active]="galleryFilter == 'fashion'"
+        class="filter-button project_button">
+        Fashion
+      </button>
+      <button
+        (click)="filter('bags')"
+        [class.active]="galleryFilter == 'bags'"
+        class="filter-button project_button">
+        Bags
+      </button>
+      <button
+        (click)="filter('shoes')"
+        [class.active]="galleryFilter == 'shoes'"
+        class="filter-button project_button">
+        Shoes
+      </button>
+      <button
+        (click)="filter('watch')"
+        [class.active]="galleryFilter == 'watch'"
+        class="filter-button project_button">
+        Watch
+      </button>
+    </div>
+    <div class="row">
+      <div
+        *ngFor="let image of Images"
+        class="isotopeSelector col-lg-4 col-sm-6">
+        <div class="overlay">
+          <div class="border-portfolio">
+            <a href="javascript:void(0)">
+              <div (click)="openImage(image)" class="overlay-background">
+                <i aria-hidden="true" class="fa fa-plus"></i>
+              </div>
+              <img [src]="image.modal.img" class="img-fluid" />
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <ks-modal-gallery
+    [buttonsConfig]="ButtonsConfig"
+    [id]="200"
+    [modalImages]="Images"
+    [plainGalleryConfig]="GalleryConfig">
+  </ks-modal-gallery>
+</section>
+<!-- Our Project End -->

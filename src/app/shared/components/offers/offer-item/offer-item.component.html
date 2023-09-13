@@ -1,0 +1,124 @@
+<div
+        [class.my-3]="margin"
+        class="offer-item-container d-flex flex-row justify-content-around align-items-center">
+    <div *ngIf="offer" class="offer-brand-container m-1">
+        <img
+                [alt]="offer.shop?.name"
+                [src]="urlToHttps(offer.shop?.mainImage)"
+                [title]="offer.shop?.name"
+                class="brand-image"/>
+        <p class="brand-name">{{ offer.shop?.name }}</p>
+    </div>
+    <div class="offer-item-image m-1">
+        <img
+                [alt]="offer.release.name + ' ' + offer.release.sku"
+                [src]="offer.release.mainImage"
+                [title]="offer.release.name + ' ' + offer.release.sku"
+                alt="main-image"
+                class="main-image"/>
+    </div>
+    <div class="offer-item-release-name m-1">
+        <a [routerLink]="['/releases/', offer.release.slug]" class="offer-name">
+            {{ offer.release.name }}
+        </a>
+        <p class="offer-sku">{{ offer.release.sku }}</p>
+    </div>
+
+    <div
+            class="d-flex flex-lg-row offer-item-group-elements flex-column justify-content-between align-items-center">
+        <div class="mx-2 my-1 width-40">
+            <p
+                    *ngIf="!isJustDropped"
+                    [class.d-none]="isReleased()"
+                    [style.color]="getStatusStyle(offer)"
+                    class="offer-status my-1">
+                <ng-container *ngIf="!(offer.status === 'live' && isRaffleEnded())">
+                    {{ getStatusName(offer) }}
+                </ng-container>
+            </p>
+            <p
+                    *ngIf="isJustDropped"
+                    [style.color]="getStatusStyle(offer)"
+                    class="offer-status my-1">
+                {{ getStatusNameIsDropped(offer) }}
+            </p>
+            <p
+                    *ngIf="showReleaseTime && offer.releaseTime != null"
+                    class="item-name text-left my-1">
+                {{ getReleaseDate() }}
+            </p>
+
+            <ng-container *ngIf="offer.raffleEnd != null">
+                <ng-container
+                        *ngIf="
+            offer.status != 'closed' &&
+            !(offer.status === 'live' && isRaffleEnded())
+          ">
+                    <p [style.color]="getRaffleStyle()" class="offer-status my-1">
+                        {{
+                        offer.status === 'closed' || isRaffleEnded()
+                            ? 'Ended on'
+                            : 'Ends on'
+                        }}
+                    </p>
+                    <p class="item-name text-left my-1">{{ getRaffleEndDate() }}</p>
+                </ng-container>
+            </ng-container>
+        </div>
+        <div class="mx-2 my-1 width-30">
+            <p
+                    *ngIf="offer.discountCode"
+                    class="offer-region text-center offer-promotion-code">
+                Use code: {{ offer.discountCode }}
+            </p>
+            <p *ngIf="!offer.salePercentage" class="offer-price">
+                {{ offer.price | currency : offer.currency }}
+            </p>
+            <ng-container *ngIf="offer.salePercentage">
+                <p class="offer-price">
+                    {{ getOldPrice(offer).toString() | currency : offer.currency }}
+                </p>
+                <p class="offer-old-price">
+                    {{ offer.price | currency : offer.currency }}
+                </p>
+            </ng-container>
+            <p class="offer-region">{{ getShippingRegions(offer.release) }}</p>
+        </div>
+        <div
+                *ngIf="offer.links.length > 1; else onlyOneLink"
+                class="mx-2 my-1 width-30">
+            <div class="d-inline-block" ngbDropdown>
+                <button class="link-button" id="links-dropdown" ngbDropdownToggle>
+                    Get it <i class="fa fa-angle-down fa-lg ml-2"></i>
+                </button>
+                <div aria-labelledby="links-dropdown" ngbDropdownMenu>
+                    <a
+                            *ngFor="let link of offer.links"
+                            [href]="link.bitlyUrl ? link.bitlyUrl : link.trackedUrl"
+                            ngbDropdownItem
+                            rel="nofollow"
+                            target="_blank">
+                        {{ link.text }}
+                    </a>
+                </div>
+            </div>
+        </div>
+        <ng-template #onlyOneLink>
+            <button
+                    *ngIf="offer.links.length"
+                    class="link-button mx-2 my-1 width-40 p-0">
+                <a
+                        [href]="
+            offer.links[0].bitlyUrl
+              ? offer.links[0].bitlyUrl
+              : offer.links[0].trackedUrl
+          "
+                        class="link"
+                        rel="nofollow"
+                        target="_blank"
+                >{{ offer.links[0].text }}</a
+                >
+            </button>
+        </ng-template>
+    </div>
+</div>
